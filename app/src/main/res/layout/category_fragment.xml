@@ -10,12 +10,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F6F7F9"
+        android:background="#fff"
         android:id="@+id/RelaMenu">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="wrap_content"
             android:id="@+id/toolbarhome"
             android:background="@color/colorPrimary">
 
@@ -26,16 +26,48 @@
                 <ImageView
                     android:id="@+id/textView"
                     android:layout_width="@dimen/_60sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
                     android:src="@drawable/logo"
                     android:textColor="#fff"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
 
+                <EditText
+                    android:id="@+id/E_Search"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bc_search"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/searchcat"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColorHint="#888888"
+                    android:textColor="#888888"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_below="@+id/textView"
+                     />
+
+
+
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
+
+
 
         <TextView
             android:id="@+id/T_Categories"
@@ -43,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbarhome"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:textSize="@dimen/_13sdp"
             android:textStyle="bold"
             android:text="@string/menu"
@@ -66,90 +98,64 @@
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/_2sdp"
             android:layout_below="@+id/T_Categories"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_height="match_parent"
             android:id="@+id/SwipCategories">
-            <!--        <androidx.recyclerview.widget.RecyclerView-->
-            <!--            android:id="@+id/recycler_Categroies"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="match_parent"-->
-            <!--            android:layout_marginStart="@dimen/_20sdp"-->
-            <!--            android:visibility="gone"-->
-            <!--            android:layout_marginEnd="@dimen/_20sdp"-->
-            <!--            android:layout_marginTop="?actionBarSize"-->
-            <!--            android:scrollbars="horizontal" />-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_Categroies"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginTop="?actionBarSize"
+                        android:scrollbars="horizontal" />
 
 
-            <com.airbnb.epoxy.EpoxyRecyclerView
-                android:id="@+id/treeItemsRv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="8dp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:paddingBottom="16dp"
-                app:itemSpacing="4dp" />
+<!--            <com.airbnb.epoxy.EpoxyRecyclerView-->
+<!--                android:id="@+id/treeItemsRv"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:paddingTop="8dp"-->
+<!--                android:layout_marginStart="@dimen/_20sdp"-->
+<!--                android:layout_marginEnd="@dimen/_20sdp"-->
+<!--                android:paddingBottom="16dp"-->
+<!--                app:itemSpacing="4dp" />-->
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-        <androidx.appcompat.widget.Toolbar
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:id="@+id/toolbarCat"
-            android:background="@android:color/transparent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/T_Categories"
+            >
 
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/placeholder"/>
+
+                <include layout="@layout/placeholder"/>
+
+                <include layout="@layout/placeholder"/>
+
+                <include layout="@layout/placeholder"/>
+
+                <include layout="@layout/placeholder"/>
 
 
-            </RelativeLayout>
-        </androidx.appcompat.widget.Toolbar>
+
+            </LinearLayout>
 
 
-        <!--   <RelativeLayout-->
-        <!--       android:layout_width="match_parent"-->
-        <!--       android:layout_marginTop="?actionBarSize"-->
-        <!--       android:background="#ff9f3a"-->
-        <!--       android:id="@+id/Rela_Address"-->
-        <!--       android:layout_height="@dimen/_55sdp">-->
-
-        <!--   </RelativeLayout>-->
-        <!--    <TextView-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:text="@string/addres"-->
-        <!--        android:layout_below="@+id/toolbar"-->
-        <!--        android:textColor="#fff"-->
-        <!--        android:textStyle="bold"-->
-        <!--        android:id="@+id/address"-->
-        <!--        android:layout_marginTop="@dimen/_10sdp"-->
-        <!--        android:layout_marginStart="@dimen/_15sdp"-->
-        <!--        />-->
-        <!--    <TextView-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:text="@string/edit"-->
-        <!--        android:layout_below="@+id/toolbar"-->
-        <!--        android:textColor="#fff"-->
-        <!--        android:textStyle="bold"-->
-        <!--        android:id="@+id/edit"-->
-        <!--        android:layout_marginTop="@dimen/_10sdp"-->
-        <!--        android:layout_marginEnd="@dimen/_10sdp"-->
-        <!--        android:layout_alignParentEnd="true"-->
-        <!--        />-->
-        <!--    <TextView-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:text="@string/addres"-->
-        <!--        android:maxLines="1"-->
-        <!--        android:layout_below="@+id/address"-->
-        <!--        android:textColor="#fff"-->
-        <!--        android:textStyle="bold"-->
-        <!--        android:id="@+id/T_Address"-->
-        <!--        android:layout_marginTop="@dimen/_2sdp"-->
-        <!--        android:layout_marginStart="@dimen/_15sdp"-->
-        <!--        />-->
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
 
     </RelativeLayout>

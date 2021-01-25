@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cairocart">
+    package="com.cairocartt">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,91 +15,47 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
-        android:windowSoftInputMode="adjustResize"
         tools:ignore="AllowBackup">
-
-        <activity android:name=".ui.NavigationActivity">
+        <activity android:name=".ui.ordersuccess.OrderSuccessActivity"
+            android:theme="@style/MyDialogTheme"></activity>
+        <activity
+            android:name=".ui.nointernet.NoInternertActivity"
+            android:theme="@style/MyDialogTheme" />
+        <activity
+            android:name=".ui.congratulition.CongratulitionCartActivity"
+            android:theme="@style/MyDialogTheme" />
+        <activity android:name=".ui.splash.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.bottomnavigate.BottomNavigateFragment"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
-
-        <!--        <activity android:name="com.cairocart.old.Activities.ReplyNotification"></activity>-->
-
-        <!--        <activity-->
-        <!--            android:name="com.cairocart.old.Activities.Filtertion"-->
-        <!--            android:theme="@style/MyDialogTheme" />-->
-        <!--        <activity android:name="com.cairocart.old.Activities.Privacy" />-->
-        <!--        <activity-->
-        <!--            android:name="com.cairocart.old.Activities.Gifts"-->
-        <!--            android:theme="@style/Theme.AppCompat.Light.Dialog" />-->
-        <!--        <activity-->
-        <!--            android:name="com.cairocart.old.Activities.Congratulation"-->
-        <!--            android:theme="@style/MyDialogTheme" />-->
-        <!--        <activity android:name="com.cairocart.old.Activities.NavigationDrawer" />-->
-        <!--        <activity android:name="com.cairocart.old.Activities.Add_Review" />-->
-        <!--        <activity android:name="com.cairocart.old.Activities.Riviews" />-->
-        <!--        <activity android:name="com.cairocart.old.Activities.ForgetPassword" />-->
-        <!--        <activity-->
-        <!--            android:name="com.cairocart.old.Activities.LogOut"-->
-        <!--            android:theme="@style/Theme.AppCompat.Light.Dialog" />-->
-        <!--        <activity-->
-        <!--            android:name="com.cairocart.old.Activities.BottomNavigation"-->
-        <!--            android:screenOrientation="portrait"-->
-        <!--            android:theme="@style/AppTheme.NoActionBar"-->
-        <!--            android:windowSoftInputMode="stateHidden">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
-
-        <!--                <category android:name="android.intent.category.DEFAULT" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
-        <!--        <activity android:name="com.cairocart.old.Activities.Splash">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
-
-        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
-        <!--        <activity-->
-        <!--            android:name="com.cairocart.old.Activities.Language"-->
-        <!--            android:theme="@style/Theme.AppCompat.Dialog" />-->
-        <!--        <activity android:name="com.cairocart.old.Activities.Register" />-->
-        <!--        <activity android:name="com.cairocart.old.Activities.Login" />-->
-        <!--        <activity android:name="com.cairocart.old.Activities.PayMent" />-->
-        <!--        <activity-->
-        <!--            android:name="com.cairocart.old.Activities.Addetional_Cart"-->
-        <!--            android:theme="@style/Theme.AppCompat.Light.Dialog" />-->
+        <activity
+            android:name=".ui.onboarding.OnBoardingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.bottomnavigate.BottomNavigateFragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-<!--        <service-->
-<!--            android:name="com.cairocart.Notifications.MyFirebaseInstanceIDService"-->
-<!--            android:exported="false">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-
+            android:value="@string/facebook_app_id" /> <!-- <service -->
+        <!-- android:name="com.cairocart.Notifications.MyFirebaseInstanceIDService" -->
+        <!-- android:exported="false"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-
-<!--        <service android:name="com.cairocart.Notifications.MyFirebaseMessaging">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
-<!--                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-
-
     </application>
 
 </manifest>

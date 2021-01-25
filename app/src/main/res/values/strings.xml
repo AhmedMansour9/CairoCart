@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jazar</string>
+    <string name="app_name">Cairo Cart</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgetpas">Forget Password?</string>
@@ -68,9 +68,9 @@
     <string name="apartment_num">Apartment Number</string>
     <string name="ordernow">Order Now</string>
     <string name="ordersuccess"> Your Order added successfully</string>
-    <string name="debit">Visa</string>
+    <string name="debit">Credit / Debit Card</string>
     <string name="perviousorder">PREVIOUS ORDERS</string>
-    <string name="cash">Cash</string>
+    <string name="cash">Cash On Delivery</string>
     <string name="noorders">Not Found Any order</string>
     <string name="orderid">Orderid</string>
     <string name="InProgress">In Progress</string>
@@ -80,7 +80,7 @@
     <string name="Deliveryaddress">Delivery address</string>
     <string name="Items">Items</string>
 
-    <string name="sub_total">sub total </string>
+    <string name="sub_total">Sub Total </string>
     <string name="Tax">Tax </string>
     <string name="Delivery_fees">Delivery fees </string>
     <string name="english">English</string>
@@ -210,7 +210,7 @@
     <string name="completed">Completed</string>
     <string name="requests">Requests</string>
     <string name="out_stock">Out Of Stock</string>
-    <string name="please_enterstate">Please Enter State</string>
+    <string name="please_enterstate">Please Enter City</string>
     <string name="total_price">Total Price</string>
     <string name="policy">Terms &amp; Conditions</string>
     <string name="checked">Please Make Sure That You Check Privacy</string>
@@ -219,11 +219,10 @@
     <string name="paid">Payment when Recieving Order</string>
     <string name="checkoutorder">ConFirm</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="addReview">Add Review</string>
-    <string name="success_addreview">Review added Success</string>
+    <string name="addReview">Review</string>
+    <string name="success_addreview">Review Sent Success</string>
     <string name="onarrival">On Arrival</string>
     <string name="canceled">Canceled</string>
-    <string name="save">Save</string>
     <string name="your_addres">Your Address</string>
     <string name="wallet">My Wallet</string>
     <string name="no_points">Number Of Points</string>
@@ -265,13 +264,66 @@
     <string name="log_in">log in</string>
     <string name="cairo">Cairo</string>
     <string name="cartLabel">Cart</string>
-    <string name="add_cart">ADD CART</string>
+    <string name="add_cart">ADD TO CART</string>
     <string name="cu"> %s EGP</string>
+    <string name="sku">SKU</string>
+    <string name="moree">More Information</string>
+    <string name="write">Write Your Review</string>
+    <string name="quality">Quality</string>
+    <string name="pricee">Price</string>
+    <string name="value">Value</string>
+    <string name="title">Title</string>
+
+    <string name="nick_name">Nick Name</string>
+    <string name="summry">Summary</string>
+    <string name="add_favourit">Product has been add to your Favourit list</string>
+    <string name="remove_favourit">Product has been remove from your favouritlist</string>
 
 
-    <string-array name="types">
-        <item>Schedule</item>
-        <item>Immediately</item>
-    </string-array>
+    <string name="max_cart">Maximum number of cart</string>
+    <string name="min_cart">Minimum number of cart</string>
+    <string name="loading">Loading</string>
+    <string name="load_cart">The product is add to the cart</string>
+    <string name="error">Error!</string>
+
+
+    <string name="price_cart">Price     %s EGP</string>
+    <string name="tprice_cart">TotalPrice     %s EGP</string>
+    <string name="finish">Finish</string>
+    <string name="pro_cart"> %s Product</string>
+
+    <string name="cart_empty">No Items in the Cart!</string>
+    <string name="sorry">Sorry</string>
+    <string name="go_shopping">GO SHOPPING</string>
+
+    <string name="searchcat">Search For Category</string>
+    <string name="refresh">Try Again</string>
+    <string name="buy_anything">Buy Anything !</string>
+    <string name="exclusive">Exclusive Products</string>
+    <string name="amazing_disc">Amazing Discount</string>
+    <string name="skip">Skip</string>
+    <string name="save">Save Changes</string>
+    <string name="clear">CLEAR ALL</string>
+    <string name="brand">Brands</string>
+    <string name="select_range">Select your Range price </string>
+    <string name="countries">Countries</string>
+    <string name="cities">Cities</string>
+    <string name="shipping_address">SHIPPING ADDRESS</string>
+    <string name="shipping_method">SHIPPING METHOD</string>
+    <string name="shipping_payment">SHIPPING PAYMENT</string>
+    <string name="order_summary">ORDER SUMMARY</string>
+    <string name="qty">Quantity %s</string>
+    <string name="validatefname">Please Validate First Name</string>
+    <string name="validateLname">Please Validate Last Name</string>
+    <string name="validateAddress">Please Validate Address</string>
+    <string name="validateEmail">Please Validate Email</string>
+    <string name="validatePhone">Please Validate  Phone</string>
+    <string name="validatemethod">Please Selec Shipping Method</string>
+    <string name="contact_information">Contact Information</string>
+    <string name="invoice">Invoice Details</string>
+    <string name="ship_amount">Shipping Amount</string>
+    <string name="searchproduct">Search For Product</string>
+    <string name="retry">Retry</string>
+
 
 </resources>

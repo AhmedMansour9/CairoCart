@@ -3,7 +3,7 @@
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
+        <item name="bottomSheetDialogTheme">@style/SheetDialog</item>
 <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
 <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
 <!--        <item name="android:textColorHint">@android:color/white</item>-->

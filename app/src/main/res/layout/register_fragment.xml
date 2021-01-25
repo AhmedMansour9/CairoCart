@@ -6,7 +6,7 @@
 
         <variable
             name="registerViewModel"
-            type="com.cairocart.ui.register.RegisterViewModel" />
+            type="com.cairocartt.ui.register.RegisterViewModel" />
     </data>
 
 
@@ -14,67 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
-
-<!--        <TextView-->
-<!--            android:id="@+id/cairo"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/_25sdp"-->
-<!--            android:fontFamily="@font/product_sans_bold"-->
-<!--            android:text="@string/cairo"-->
-<!--            android:textColor="@color/addition2"-->
-<!--            android:textSize="30sp"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/cart"-->
-<!--            app:layout_constraintHorizontal_chainStyle="packed"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/cart"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/product_sans_bold"-->
-<!--            android:text="@string/cartLabel"-->
-<!--            android:textColor="@color/addition1"-->
-<!--            android:textSize="30sp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/cairo"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/cairo" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/create_msg"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="18dp"-->
-<!--            android:layout_marginTop="@dimen/_30sdp"-->
-<!--            android:layout_marginRight="18dp"-->
-<!--            android:fontFamily="@font/productsansregular"-->
-<!--            android:text="@string/create_msg_label"-->
-<!--            android:textAllCaps="true"-->
-<!--            android:textColor="@android:color/darker_gray"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/cairo" />-->
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/tell_us"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="18dp"-->
-<!--            android:layout_marginTop="@dimen/_10sdp"-->
-<!--            android:layout_marginRight="18dp"-->
-<!--            android:fontFamily="@font/product_sans_bold"-->
-<!--            android:text="@string/tell_us_about_yourself"-->
-<!--            android:textColor="@color/addition1"-->
-<!--            android:textSize="30sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/create_msg" />-->
        <ScrollView
            android:layout_width="match_parent"
            android:layout_height="match_parent"

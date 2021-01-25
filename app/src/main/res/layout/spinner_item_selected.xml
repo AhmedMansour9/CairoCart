@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/Title"
-    android:textColor="#5d6e59"
-    android:paddingStart="@dimen/_10sdp"
+    android:textColor="#838383"
+    android:textSize="@dimen/_12sdp"
     android:background="@android:color/transparent"
     style="?attr/spinnerDropDownItemStyle"
     android:singleLine="true"
-    android:gravity="center"
+    android:gravity="start|center"
+
     android:layout_width="match_parent"
     android:layout_height="?attr/dropdownListPreferredItemHeight"
     android:ellipsize="marquee"/>

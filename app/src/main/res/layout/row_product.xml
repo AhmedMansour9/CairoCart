@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.cairocart.data.remote.model.ProductsResponse.Data" />
+            type="com.cairocartt.data.remote.model.ProductsResponse.Data" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -71,7 +71,7 @@
                 android:fontFamily="@raw/cairo"
                 android:maxLines="2"
                 android:text= "@{model.name}"
-                android:textColor="#676767"
+                android:textColor="#000"
                  />
 
             <TextView
@@ -88,7 +88,7 @@
                 android:textSize="@dimen/_9sdp"
                 android:fontFamily="@raw/cairo"
                 android:maxLines="2"
-                android:text= "@{ model.description}"
+                app:descrption= "@{ model.short_description}"
                 android:textColor="#676767"
                  />
 
@@ -104,11 +104,57 @@
                 android:layout_toEndOf="@+id/Img_Product"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text= "@{@string/cu(model.price)}"
+                android:text= "@{@string/cu(model.final_price)}"
                 android:fontFamily="@raw/cairo"
-
                 android:textColor="@color/blue"
                  />
+
+
+            <TextView
+                android:id="@+id/T_BeforePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/T_SmallDescrip"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/T_SalePrice"
+                android:ellipsize="end"
+                android:maxLines="1"
+                app:BeforePrice="@{model.price}"
+                app:FinalPrice="@{model.final_price}"
+                android:fontFamily="@raw/cairo"
+                android:textColor="@color/grayy"
+                />
+
+
+
+            <ImageView
+                android:id="@+id/img_true"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:layout_below="@+id/T_SalePrice"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/Img_Product"
+
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/img_true" />
+
+
+
+            <TextView
+                android:id="@+id/Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/img_true"
+                android:layout_below="@+id/T_SalePrice"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:text="@string/in_stock"
+                android:textColor="#676767" />
+
+
 
 <!--            <TextView-->
 <!--                android:id="@+id/T_OriginalPrice"-->
@@ -153,18 +199,9 @@
                 android:layout_marginTop="@dimen/_6sdp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_roundedcart"
-                android:layout_toStartOf="@+id/Img_Compare"
+                android:layout_toStartOf="@+id/Img_Favourit"
                 />
-            <ImageView
-                android:id="@+id/Img_Compare"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_below="@+id/T_SalePrice"
-                android:layout_marginTop="@dimen/_6sdp"
-               android:layout_toStartOf="@+id/Img_Favourit"
-                android:src="@drawable/ic_compare"
-                android:layout_marginEnd="@dimen/_5sdp"
-                />
+
             <ImageView
                 android:id="@+id/Img_Favourit"
                 android:layout_width="@dimen/_25sdp"

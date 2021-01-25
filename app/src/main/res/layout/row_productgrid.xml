@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="com.cairocart.data.remote.model.ProductsResponse.Data" />
+            type="com.cairocartt.data.remote.model.ProductsResponse.Data" />
 
     </data>
 
@@ -60,66 +60,75 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_below="@+id/PannerCard"
-                android:ellipsize="end"
                 android:gravity="center"
                 android:fontFamily="@raw/cairo"
                 android:text= "@{model.name}"
-                android:layout_centerHorizontal="true"
                 android:textSize="@dimen/_10sdp"
                 android:maxLines="2"
                 android:textColor="#676767"
                 android:includeFontPadding="false"
-
+                android:layout_centerHorizontal="true"
                 />
 
 
 
 
-            <TextView
-                android:id="@+id/T_SalePrice"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Title"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_centerHorizontal="true"
-                android:ellipsize="end"
-                android:textSize="@dimen/_10sdp"
-                android:text= "@{@string/cu(model.price)}"
-                android:maxLines="1"
-                android:textColor="@color/blue"
-                android:textStyle="bold" />
+                android:layout_below="@+id/Title"
+                android:id="@+id/Rela"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/T_SalePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:text= "@{@string/cu(model.price)}"
+                    android:maxLines="1"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/T_BeforePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_toEndOf="@+id/T_SalePrice"
+
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:BeforePrice="@{model.price}"
+                    app:FinalPrice="@{model.final_price}"
+                    android:fontFamily="@raw/cairo"
+                    android:textColor="@color/grayy"
+                    />
+
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/Btn_AddCart"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
-                android:layout_below="@+id/T_SalePrice"
+                android:layout_below="@+id/Rela"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:src="@drawable/ic_roundedcart"
-                android:layout_toStartOf="@+id/Img_Compare"
+                android:layout_alignStart="@+id/PannerCard"
                 />
 
-            <ImageView
-                android:id="@+id/Img_Compare"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_below="@+id/T_SalePrice"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_compare"
-                android:layout_marginEnd="@dimen/_5sdp"
-                />
             <ImageView
                 android:id="@+id/Img_Favourit"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
-                android:layout_below="@+id/T_SalePrice"
+                android:layout_below="@+id/Rela"
                 android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 app:checkFavourit="@{model.isInWishlist()}"
-                android:layout_toEndOf="@+id/Img_Compare"
+                android:layout_alignEnd="@+id/PannerCard"
                 android:layout_marginStart="10dp"
                 />
 

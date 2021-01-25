@@ -250,10 +250,5 @@
     <string name="cu">جنيه</string>
 
 
-    <string-array name="types">
-        <item>توصيل مجمع يوميا</item>
-        <item>توصيل سريع</item>
-
-    </string-array>
 
 </resources>

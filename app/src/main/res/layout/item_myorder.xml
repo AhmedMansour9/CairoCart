@@ -1,130 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:layout_marginStart="@dimen/_4sdp"
-    android:layout_marginBottom="@dimen/_10sdp"
-    android:layout_marginEnd="@dimen/_4sdp"
-    app:cardCornerRadius="@dimen/_2sdp"
-    app:cardElevation="@dimen/_2sdp"
-    android:background="#fff">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="model"
+            type="com.cairocartt.data.remote.model.MyOrdersResponse.Data" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:background="#fff"
-        >
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
+        app:cardCornerRadius="@dimen/_2sdp"
+        app:cardElevation="@dimen/_2sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_9sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:textColor="#000000"
-            android:text="@string/date"
-            android:textSize="@dimen/_12sdp"
-            />
-        <TextView
-            android:id="@+id/T_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_9sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_2sdp"
-            android:textColor="#000000"
-            android:layout_toEndOf="@+id/date"
-            android:textSize="@dimen/_12sdp"
-            />
-        <TextView
-            android:id="@+id/orderid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_toStartOf="@+id/T_order_id"
-            android:text="@string/orderid"
-            android:layout_marginTop="@dimen/_9sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:textColor="#000000"
-            android:textSize="@dimen/_12sdp"
-            android:maxLines="1"/>
-        <TextView
-            android:id="@+id/T_order_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true"
-            android:text="100"
-            android:layout_marginTop="@dimen/_9sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:textColor="#000"
-            android:textSize="@dimen/_12sdp"
-            android:maxLines="1"/>
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/price"
-            android:layout_below="@+id/T_date"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
-            android:maxLines="1"
-            />
-        <TextView
-            android:id="@+id/T_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/price"
-            android:layout_below="@+id/T_date"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_3sdp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
-            android:maxLines="1"
-            />
+            android:background="#fff">
+
+            <TextView
+                android:id="@+id/orderid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:maxLines="1"
+                android:text="@string/orderid"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/T_order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_toEndOf="@+id/orderid"
+                android:maxLines="1"
+                android:text= "@{model.mobileItems.get(0).orderId.toString()}"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
 
 
-        <TextView
-            android:id="@+id/T_order_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/InProgress"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="@dimen/_7sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:textColor="#fff"
-            android:background="@drawable/bc_orderstatus"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:textSize="@dimen/_12sdp"
-            android:layout_below="@+id/T_order_id"
-            />
-        <!--<TextView
-            android:id="@+id/T_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="status"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginEnd="@dimen/_2sdp"
-            android:layout_marginStart="@dimen/_1sdp"
-            android:textColor="#838383"
-            android:textSize="@dimen/_12sdp"
-            android:layout_toEndOf="@+id/T_order_status"
-            android:layout_below="@+id/T_user_name"
-            />-->
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:text= "@{model.createdAt.toString()}"
+
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/no_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/orderid"
+                android:maxLines="1"
+                android:text="@string/n_products"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/T_NoProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/orderid"
+                android:layout_toEndOf="@+id/no_product"
+                android:maxLines="1"
+                android:text= "@{model.totalItemCount.toString()}"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
 
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/totalprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/no_product"
+                android:maxLines="1"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@string/total_price"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/T_TotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/no_product"
+                android:layout_toEndOf="@+id/no_product"
+                android:maxLines="1"
+                android:text= "@{model.grandTotal.toString()}"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/T_Status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/no_product"
+                android:maxLines="1"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text= "@{model.status.toString()}"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/no_product"
+                android:maxLines="1"
+                android:text="@string/status"
+                android:layout_toStartOf="@+id/T_Status"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textColor="#676767"
+                android:textSize="@dimen/_12sdp" />
+
+        </RelativeLayout>
 
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>

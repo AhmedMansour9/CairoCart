@@ -13,8 +13,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
@@ -22,19 +20,18 @@ android {
         experimental = true
     }
     defaultConfig {
-        applicationId "com.cairocart"
+        applicationId "com.cairocartt"
         multiDexEnabled true
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.3"
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String', 'BASE_URL', "\"https://magento-364088-1142992.cloudwaysapps.com/\""
-        buildConfigField 'String', 'AUTHORIZATION', "\"Bearer m4ylvans6845xbj5k2qmeq1k8wpn28eq\""
-        buildConfigField 'String', 'CONSUMER_KEY', "\"ekh2xhe9mzijqcf4ved5c47ny8cz4vp3\""
-        buildConfigField 'String', 'CONSUMER_SECRET', "\"b4xx4wve92ltc2wfxq6gpfj6utd22b3j\""
+        buildConfigField 'String', 'BASE_URL', "\"https://magento-364088-1596484.cloudwaysapps.com/\""
+        buildConfigField 'String', 'CONSUMER_KEY', "\"e2kz22o6eoalqr0mox79ujrig9uup0u3\""
+        buildConfigField 'String', 'CONSUMER_SECRET', "\"ywsqmdqpeaff1kjefmh216v349cgbbyv\""
     }
 
     buildTypes {
@@ -61,17 +58,17 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     kapt "com.android.databinding:compiler:3.1.4"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment:2.3.1'
-    implementation 'androidx.navigation:navigation-ui:2.3.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.1"
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.2"
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
@@ -88,7 +85,6 @@ dependencies {
 
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'me.relex:circleindicator:2.1.4'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.kaopiz:kprogresshud:1.2.0'
 
@@ -117,9 +113,6 @@ dependencies {
     implementation "com.airbnb.android:epoxy:4.1.0"
     kapt 'com.airbnb.android:epoxy-processor:4.1.0'
 
-//    implementation 'com.airbnb.android:epoxy-databinding:4.1.0'
-    // Add the annotation processor if you are using Epoxy's annotations (recommended)
-//    annotationProcessor "com.airbnb.android:epoxy-processor:4.1.0"
 
 
 
@@ -146,9 +139,8 @@ dependencies {
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
 
 
-    //DataSource
-    implementation "androidx.datastore:datastore-core:1.0.0-alpha02"
-    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+    implementation "androidx.datastore:datastore:1.0.0-alpha03"
+//    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha03"
 
 
     def paging_version = "3.0.0-alpha08"
@@ -156,6 +148,15 @@ dependencies {
 
     implementation 'com.facebook.shimmer:shimmer:0.1.0'
 
+    implementation 'com.github.smarteist:autoimageslider:1.3.9'
 
+    implementation 'com.github.eminsr:AwesomeDialog:master-SNAPSHOT'
+
+//viewpager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+//indicator
+    implementation 'me.relex:circleindicator:2.1.4'
+
+    implementation 'com.crystal:crystalrangeseekbar:1.1.3'
 }
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'

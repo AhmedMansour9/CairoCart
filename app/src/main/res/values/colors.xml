@@ -16,13 +16,21 @@
 
 
     <color name="lines_color">#262D37</color>
-<!--    <color name="colorAccent">#314E6A</color>-->
+    <!--    <color name="colorAccent">#314E6A</color>-->
     <color name="white">#FFFFFF</color>
     <color name="icons_color">#f2a365</color>
     <color name="light_color">#ececec</color>
     <color name="grey_60">#666666</color>
     <color name="grey_80">#37474F</color>
     <color name="grey_20">#cccccc</color>
-    <color name="placeholder_color">#dedede</color>
+    <color name="placeholder_color">#C8C8C8</color>
+
+    <color name="grayy">#676767</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="dark_blue">#000080</color>
 
 </resources>

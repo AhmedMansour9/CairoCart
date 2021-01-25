@@ -28,14 +28,14 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
 
-        <Button
-            android:id="@+id/load_state_retry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:text="Retry"
-            android:layout_alignParentRight="true" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/load_state_retry"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:text="@string/retry"-->
+<!--            android:al="true" />-->
 
     </RelativeLayout>
 </layout>

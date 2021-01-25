@@ -8,9 +8,9 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0"
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
 
         def nav_version = "2.3.0-rc01"
@@ -29,11 +29,7 @@ allprojects {
 
     }
 }
-gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xmaxerrs" << "500" // or whatever number you want
-    }
-}
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
