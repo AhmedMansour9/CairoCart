@@ -16,8 +16,14 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.ordersuccess.OrderSuccessActivity"
+        <activity android:name=".ui.forgetpassword.ForgetPasswordActivity"
             android:theme="@style/MyDialogTheme"></activity>
+        <activity
+            android:name=".ui.ordersuccess.OrderSuccessActivity"
+            android:theme="@style/MyDialogTheme" />
+        <activity
+            android:name="com.cutz.ui.languag.Language"
+            android:theme="@style/MyDialogTheme" />
         <activity
             android:name=".ui.nointernet.NoInternertActivity"
             android:theme="@style/MyDialogTheme" />
@@ -56,6 +62,22 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
+
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+        <service
+            android:name=".Notifications.MyFirebaseMessaging"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

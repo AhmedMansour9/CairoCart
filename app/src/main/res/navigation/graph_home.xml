@@ -11,7 +11,20 @@
         android:id="@+id/homeFragment"
         android:name="com.cairocartt.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchResultProduct"
+            app:destination="@id/searchResultProduct" />
+        <action
+            android:id="@+id/action_homeFragment_to_productsById"
+            app:destination="@id/productsById" />
+        <action
+            android:id="@+id/action_homeFragment_to_resultFiltertionFragment"
+            app:destination="@id/resultFiltertionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_resultFiltertionFragment2"
+            app:destination="@id/resultFiltertionFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/T_Categories"
@@ -24,6 +37,12 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_T_Categories_to_subCategoriesFragment"
+            app:destination="@id/subCategoriesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -146,6 +165,14 @@
         android:id="@+id/searchResultProduct"
         android:name="com.cairocartt.ui.resultsearch.SearchResultProduct"
         android:label="SearchResultProduct" />
+    <fragment
+        android:id="@+id/subCategoriesFragment"
+        android:name="com.cairocartt.ui.subcategories.SubCategoriesFragment"
+        android:label="SubCategoriesFragment" >
+        <action
+            android:id="@+id/action_subCategoriesFragment_to_productsById"
+            app:destination="@id/productsById" />
+    </fragment>
 
 
     <!--    </navigation>-->

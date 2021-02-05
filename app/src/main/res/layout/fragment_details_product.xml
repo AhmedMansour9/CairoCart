@@ -92,8 +92,8 @@
                         app:sliderIndicatorOrientation="horizontal"
                         app:sliderIndicatorPadding="3dp"
                         app:sliderIndicatorRadius="2dp"
-                        app:sliderIndicatorSelectedColor="@color/colorPrimary"
-                        app:sliderIndicatorUnselectedColor="#FFF"
+                        app:sliderIndicatorSelectedColor="@color/blue"
+                        app:sliderIndicatorUnselectedColor="@color/black"
                         app:sliderScrollTimeInSec="3"
                         app:sliderStartAutoCycle="true" />
 
@@ -539,7 +539,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Reviews"
+                                android:text="@string/reviews"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                 android:textColor="@color/grey_80" />
 
@@ -561,13 +561,27 @@
                         <LinearLayout
                             android:id="@+id/lyt_expand_reviews"
                             android:layout_width="match_parent"
+                            android:visibility="gone"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                      >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/noreviws"
+                                android:visibility="gone"
+                                android:id="@+id/T_NoReviwes"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginBottom="@dimen/_20sdp"
+                                android:textColor="@color/black"
+                                android:layout_gravity="center"
+                                />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/reviwesRecyclerView"
                                 android:layout_width="match_parent"
+                                android:visibility="gone"
                                 android:layout_height="wrap_content"
                                 android:minHeight="@dimen/_40sdp" />
 
@@ -625,6 +639,27 @@
                             android:layout_height="1px"
                             android:layout_marginBottom="@dimen/_20sdp"
                             android:background="@color/grey_20" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:textColor="@color/blue"
+                            android:text="@string/related_product"
+                            android:id="@+id/T_Related"
+                            />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_ProductsRelated"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_200sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ss"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:scrollbars="horizontal"  />
 
 
                     </LinearLayout>

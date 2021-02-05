@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">جزر</string>
+    <string name="app_name">كايرو كارت</string>
     <string name="email">البريد الالكتروني</string>
     <string name="password">الرقم السري</string>
     <string name="forgetpas">هل نسيت كلمة المرور ؟</string>
@@ -129,7 +129,7 @@
     <string name="next">التالي</string>
     <string name="done">انتهي</string>
     <string name="deal">عروض اليوم</string>
-    <string name="feature">المنتج المميز</string>
+    <string name="feature">المنتجات المميزة</string>
     <string name="new_arriv">الوافدون الجدد</string>
     <string name="bes_selling">أفضل مبيعات</string>
     <string name="our_blog">طبق اليوم</string>
@@ -207,7 +207,6 @@
     <string name="addReview">اضف تقييم</string>
     <string name="success_addreview">تمت إضافة التقييم بنجاح</string>
     <string name="onarrival">علي وشك الوصول</string>
-    <string name="save">Save</string>
     <string name="your_addres">عنوانك</string>
     <string name="wallet">محفظتي</string>
     <string name="no_points">عدد النقاط</string>
@@ -247,8 +246,81 @@
     <string name="log_in">log in</string>
     <string name="cairo">Cairo</string>
     <string name="cartLabel">Cart</string>
-    <string name="cu">جنيه</string>
+    <string name="related_product">المنتجات المماثلة</string>
 
+
+    <string name="add_cart">اضف الي السلة</string>
+    <string name="cu"> %s جنيه</string>
+    <string name="sku">كود</string>
+    <string name="moree">المزيد من المعلومات</string>
+    <string name="write">اضف تقييمك</string>
+    <string name="quality">الجودة</string>
+    <string name="pricee">السعر</string>
+    <string name="value">قيمة</string>
+    <string name="title">العنوان</string>
+
+    <string name="nick_name">الاسم المختصر</string>
+    <string name="summry">ملخص</string>
+    <string name="add_favourit">تمت إضافة المنتج إلى قائمة المفضلة لديك</string>
+        <string name="remove_favourit">تمت إزالة المنتج من قائمة المفضلة الخاصة بك</string>
+
+
+    <string name="max_cart">أقصى عدد مسموح للاضافة الي العربة</string>
+    <string name="min_cart">اقل عدد مسموح </string>
+    <string name="loading">تحميل</string>
+    <string name="load_cart">تم إضافة المنتج إلى عربة التسوق</string>
+    <string name="error">خطأ!</string>
+
+
+    <string name="price_cart">السعر  %s  جنيه</string>
+    <string name="tprice_cart">السعر الكلي  %s جنيه</string>
+    <string name="finish">انهاء</string>
+    <string name="pro_cart">  %s منتج</string>
+
+    <string name="cart_empty">لا يوحد منتجات في العربة!</string>
+    <string name="sorry">نأسف</string>
+    <string name="go_shopping">اذهب الي التسوق</string>
+
+    <string name="searchcat">ابحث عن القسم</string>
+    <string name="refresh">حاول ثانيا</string>
+    <string name="buy_anything">اشتري اي حاجة !</string>
+    <string name="exclusive">منتجات حصرية</string>
+    <string name="amazing_disc">خصم مذهل</string>
+    <string name="skip">تخطي</string>
+    <string name="save">حفظ التغييرات</string>
+    <string name="clear">CLEAR ALL</string>
+    <string name="brand">ماركات</string>
+    <string name="select_range">Select your Range price </string>
+    <string name="countries">البلاد</string>
+    <string name="cities">المدن</string>
+    <string name="shipping_address">عنوان الشحن</string>
+    <string name="shipping_method">طرق الشحن</string>
+    <string name="shipping_payment">طرق الدفع</string>
+    <string name="order_summary">ملخص الطلب</string>
+    <string name="qty">الكمية %s </string>
+    <string name="validatefname">من فضلك تأكد من ادخال الاسم الاول</string>
+    <string name="validateLname">من فضلك تأكد من ادخال الاسم الاخير</string>
+    <string name="validateAddress">من فضلك تأكد من ادخال العنوان</string>
+    <string name="validateEmail">من فضلك تأكد من ادخال البريد</string>
+    <string name="validatePhone">من فضلك تأكد من ادخال رقم التليفون</string>
+    <string name="validatemethod">من فضلك تأكد من اختيار طرق الشحن</string>
+    <string name="contact_information">معلومات التواصل</string>
+    <string name="invoice">تفاصيل الفاتورة</string>
+    <string name="ship_amount">سعر الشحن</string>
+    <string name="searchproduct">ابحث عن منتجات</string>
+    <string name="retry">حاول ثانيا</string>
+    <string name="choose">اختر اللغة</string>
+    <string name="processing">يتم التجهيز</string>
+    <string name="fraud">Suspected Fraud</string>
+    <string name="pending_payment">في انتظار الدفع</string>
+    <string name="holded">في الانتظار</string>
+    <string name="closed">مغلق</string>
+    <string name="n_cart">عدد المنتجات</string>
+    <string name="T_cart">المجموع الكلي</string>
+    <string name="s_service">خدمة الشحن</string>
+    <string name="t_bill">إجمالي الفاتورة</string>
+    <string name="email_sentsucces">تم ارسال الي البريد الالكتروني بنجاح</string>
+    <string name="wrong_email">البريد الالكتروني خطأ</string>
 
 
 </resources>

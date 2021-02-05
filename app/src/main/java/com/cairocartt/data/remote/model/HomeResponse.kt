@@ -40,7 +40,7 @@ data class HomeResponse(
             @SerializedName("reference_id")
             var referenceId: Int?,
             @SerializedName("reference_type")
-            var referenceType: String?,
+            var referenceType: String,
             @SerializedName("thumbnail")
             var thumbnail: String,
             @SerializedName("title")

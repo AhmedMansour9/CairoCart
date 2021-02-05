@@ -2,7 +2,7 @@
     <string name="app_name">Cairo Cart</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="forgetpas">Forget Password?</string>
+    <string name="forgetpas">Forget Password ?</string>
     <string name="login">Login</string>
     <string name="or">Or</string>
     <string name="loginface">LOGIN WITH FCAEBOOK</string>
@@ -71,7 +71,7 @@
     <string name="debit">Credit / Debit Card</string>
     <string name="perviousorder">PREVIOUS ORDERS</string>
     <string name="cash">Cash On Delivery</string>
-    <string name="noorders">Not Found Any order</string>
+    <string name="noorders">Not found any order</string>
     <string name="orderid">Orderid</string>
     <string name="InProgress">In Progress</string>
     <string name="Delivered">Delivered</string>
@@ -85,7 +85,7 @@
     <string name="Delivery_fees">Delivery fees </string>
     <string name="english">English</string>
     <string name="herbian">Hebrew</string>
-    <string name="arabic">Arabic</string>
+    <string name="arabic">عربي</string>
     <string name="Deliver">Deliver</string>
     <string name="date">Date</string>
     <string name="price">Price :</string>
@@ -125,7 +125,7 @@
     <string name="next">Next</string>
     <string name="done">Done</string>
     <string name="deal">DEALS OF THE DAY</string>
-    <string name="feature">Feature Product</string>
+    <string name="feature">Featured product</string>
     <string name="new_arriv">NEW ARRIVALS</string>
     <string name="bes_selling">BESTSELLING</string>
     <string name="our_blog">Today\'s dish</string>
@@ -167,12 +167,12 @@
     <string name="forget_pas">Forget Password</string>
     <string name="search">Search For Product</string>
 
-    <string name="facebook_app_id">1990709114396351</string>
+    <string name="facebook_app_id">131416335377246</string>
     <string name="leave_review">Leave Review</string>
     <string name="loginhome">(Login/</string>
     <string name="registerhome">Register)</string>
     <string name="comment">Comment</string>
-    <string name="confirm">ConFirm</string>
+    <string name="confirm">Confirm</string>
     <string name="exit_message">Do You Want To Exit ?</string>
     <string name="my_acc">My Account</string>
     <string name="promo">Promo Code</string>
@@ -324,6 +324,14 @@
     <string name="ship_amount">Shipping Amount</string>
     <string name="searchproduct">Search For Product</string>
     <string name="retry">Retry</string>
-
+    <string name="related_product">Related Product</string>
+    <string name="choose">Chose your language</string>
+    <string name="processing">Processing</string>
+    <string name="fraud">Suspected Fraud</string>
+    <string name="pending_payment">Pending Payment</string>
+    <string name="holded">On Hold</string>
+    <string name="closed">Closed</string>
+    <string name="email_sentsucces">Check your Email to reset your password</string>
+    <string name="wrong_email">Email is not valid</string>
 
 </resources>
