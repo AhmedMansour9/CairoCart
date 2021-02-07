@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="productsViewModel"
+            type="com.cairocartt.ui.cart.CartViewModel" />
+
+        <variable
+            name="model"
+            type="com.cairocartt.data.remote.model.ListCartResponse.Data" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/RelaMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8FBFF">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbaproduct"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/textView"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/logo"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <RelativeLayout
+            android:id="@+id/RelaCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:layout_marginTop="?actionBarSize"
+            android:background="#F6F7F9">
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/SwipCart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/Relaa_Cart"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_ProductCart"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:scrollbars="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ss" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Relaa_Cart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_above="@+id/Btn_Order"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="2dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/Total_Products"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@{@string/pro_cart(model.itemsCount)}"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/T_Taxes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/no_products"
+                        android:textColor="#676767"
+                        android:textSize="@dimen/_13sdp" />
+
+
+                    <TextView
+                        android:id="@+id/Total_Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@{@string/cu(model.subtotal)}"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/sub_total"
+                        android:textColor="#676767"
+                        android:textSize="@dimen/_13sdp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Btn_Order"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/product_sans_bold"
+                android:onClick="Btn_Cart"
+                android:text="@string/checkout"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12sdp"
+                app:backgroundTint="@color/blue"
+                app:cornerRadius="30dp" />
+
+        </RelativeLayout>
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/placeholder" />
+
+                <include layout="@layout/placeholder" />
+
+                <include layout="@layout/placeholder" />
+
+                <include layout="@layout/placeholder" />
+
+                <include layout="@layout/placeholder" />
+
+
+            </LinearLayout>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/Rela_Empty"
+            android:visibility="invisible"
+            android:layout_marginTop="?actionBarSize">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:id="@+id/img"
+                android:layout_marginTop="@dimen/_70sdp"
+                android:src="@drawable/img_emptycart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sorry"
+                android:textColor="#87879D"
+                android:textStyle="bold"
+                android:textSize="@dimen/_18sdp"
+                android:id="@+id/T_Success"
+                android:layout_below="@+id/img"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#87879D"
+                android:id="@+id/T_Message"
+                android:text="@string/cart_empty"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_below="@+id/T_Success"
+                android:bufferType="spannable"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textIsSelectable="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Btn_GoHome"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:fontFamily="@font/product_sans_bold"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/go_shopping"
+                android:layout_below="@+id/T_Message"
+                android:textAllCaps="false"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12sdp"
+                app:backgroundTint="#FF6584"
+                app:cornerRadius="30dp"
+                />
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

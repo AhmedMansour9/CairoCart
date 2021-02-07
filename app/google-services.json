@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "301724980505",
+    "project_id": "cairo-cart-8d2f5",
+    "storage_bucket": "cairo-cart-8d2f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301724980505:android:f5d73f83c4819979502188",
+        "android_client_info": {
+          "package_name": "com.cairocartt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301724980505-rd7hrka4ev6faatko7qs24poa2q9ikne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cairocartt",
+            "certificate_hash": "9c0f349fba010ff4e66c44354f9131b3439449f8"
+          }
+        },
+        {
+          "client_id": "301724980505-l50t7n66odp4hu5mai0hjhbrvgroc76t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0M809tz5oM4LZT3UaN8puGWlziQRcLLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301724980505-l50t7n66odp4hu5mai0hjhbrvgroc76t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

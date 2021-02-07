@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="@dimen/_120sdp"
+    android:background="#fff"
+    android:layout_height="@dimen/_40sdp">
+
+    <TextView
+        android:id="@+id/T_City"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/_12sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:textColor="#838383"
+
+        />
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="reviewViewModel"
+            type="com.cairocartt.ui.addreview.AddReviewViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        tools:context=".ui.addreview.AddReviewFragment">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/_20sdp"
+                android:background="@color/white"
+                tools:context=".ui.addreview.AddReviewFragment">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintRight_toRightOf="parent"
+          app:layout_constraintLeft_toLeftOf="parent"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:textSize="@dimen/_14sdp"
+          android:textStyle="bold"
+          android:textColor="#414143"
+          android:text="@string/quality"
+          android:id="@+id/quantity"
+          />
+
+
+        <RatingBar
+            android:id="@+id/RatingBarQuality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/quantity"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:numStars="5"
+            android:rating="@={reviewViewModel.reviewqueality}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:theme="@style/AppThemeRatingBar"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_centerHorizontal="true"
+            android:progressTint="#F98210"
+            android:stepSize="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/RatingBarQuality"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            android:textColor="#414143"
+            android:text="@string/pricee"
+            android:id="@+id/Price"
+            />
+
+        <RatingBar
+            android:id="@+id/RatingBarPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/Price"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:numStars="5"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:rating="@={reviewViewModel.reviewprice}"
+
+            android:theme="@style/AppThemeRatingBar"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_centerHorizontal="true"
+            android:progressTint="#F98210"
+            android:stepSize="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/RatingBarPrice"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            android:textColor="#414143"
+            android:text="@string/value"
+            android:id="@+id/Value"
+            />
+
+        <RatingBar
+            android:id="@+id/RatingBarValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/Value"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:numStars="5"
+            android:rating="@={reviewViewModel.reviewvalue}"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:theme="@style/AppThemeRatingBar"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_centerHorizontal="true"
+            android:progressTint="#F98210"
+            android:stepSize="1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/firstTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="25dp"
+            android:hint="@string/nick_name"
+            android:textColor="#414143"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@+id/RatingBarValue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:textColor="#414143"
+                android:inputType="text"
+                android:text="@={reviewViewModel.addReview.nickname}"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/product_sans_bold"
+                />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="25dp"
+            android:hint="@string/summry"
+            android:textColor="#414143"
+
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@+id/firstTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="#414143"
+                android:text="@={reviewViewModel.addReview.title}"
+                android:inputType="text"
+                android:fontFamily="@font/product_sans_bold"
+               />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/commentTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:textColor="#414143"
+            android:hint="@string/comment"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@+id/lastTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#414143"
+                android:maxLines="1"
+                android:text="@={reviewViewModel.addReview.detail}"
+                android:fontFamily="@font/product_sans_bold"
+               />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReview"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:onClick="@{()->reviewViewModel.navigator.onClickReview()}"
+
+            android:text="@string/addReview"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:backgroundTint="#069EEC"
+            app:cornerRadius="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/commentTextField"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ProgressBar
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            android:id="@+id/Progress"
+            />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
