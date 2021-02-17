@@ -239,4 +239,10 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>(), SwipeRefreshLayout.On
         }
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e("TAG", "onDestroy: " )
+
+    }
 }

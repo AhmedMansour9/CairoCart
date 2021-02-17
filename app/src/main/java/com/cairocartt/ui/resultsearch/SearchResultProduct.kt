@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -31,6 +32,7 @@ import com.cairocartt.data.remote.model.ProductsResponse
 import com.cairocartt.databinding.FragmentResultFiltertionBinding
 import com.cairocartt.databinding.FragmentSearchResultProductBinding
 import com.cairocartt.ui.bottomnavigate.BottomNavigateFragment
+import com.cairocartt.ui.detailsproduct.DetailsProductFragment
 import com.cairocartt.ui.detailsproduct.DetailsProductViewModel
 import com.cairocartt.ui.login.LoginActivity
 import com.cairocartt.ui.nointernet.NoInternertActivity
@@ -90,10 +92,14 @@ class SearchResultProduct : BaseFragment<FragmentSearchResultProductBinding>(),
         productsGridAdapter = ProductsGridByIdAdapter(requireContext(),productData = object :
             ProductsGridByIdAdapter.ProductItemListener {
             override fun itemClicked(productData: ProductsResponse.Data?) {
+                val newDialogFragment = DetailsProductFragment()
                 val bundle2 = Bundle()
                 bundle2.putParcelable("item", productData)
-                Navigation.findNavController(mViewDataBinding.root)
-                    .navigate(R.id.action_resultFiltertionFragment_to_detailsProductFragment, bundle2);
+                newDialogFragment.arguments=bundle2
+                val transaction: FragmentTransaction =
+                    requireActivity().supportFragmentManager.beginTransaction()
+                newDialogFragment.show(transaction, "New_Dialog_Fragment")
+
             }
             override fun itemFavourit(productData: ProductsResponse.Data?) {
                 detailsProduct=productData!!

@@ -92,8 +92,8 @@ class BottomNavigateFragment : BaseActivity<BottomFragmentBinding>() {
         navController = navHostFragment.navController
 
         setupWithNavController(bottomNavigationView, navHostFragment.navController)
-        bottomNavigationView.setOnNavigationItemReselectedListener(){
-        }
+//        bottomNavigationView.setOnNavigationItemReselectedListener(){
+//        }
     }
 
     private fun preventRecreate() = bottomNavigationView.setOnNavigationItemSelectedListener {

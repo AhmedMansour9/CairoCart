@@ -333,5 +333,6 @@
     <string name="closed">Closed</string>
     <string name="email_sentsucces">Check your Email to reset your password</string>
     <string name="wrong_email">Email is not valid</string>
+    <string name="continuecartt">Continue</string>
 
 </resources>

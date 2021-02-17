@@ -35,7 +35,7 @@
     <string name="subtotal">المجموع :</string>
     <string name="tax">الضرائب : </string>
     <string name="ship">الشحن :</string>
-    <string name="checkout">تكملة الطلب </string>
+    <string name="checkout">اكمال الطلب </string>
     <string name="selectbranch">حدد الفرغ</string>
     <string name="register">انشاء حساب</string>
     <string name="validemail">رجاء قم بإدخال بريد الكتروني صحيح</string>
@@ -66,7 +66,7 @@
     <string name="b_number">رقم المبنى</string>
     <string name="f_number">رقم الطابق</string>
     <string name="apartment_num">رقم الشقة</string>
-    <string name="ordernow">اطلب الان</string>
+    <string name="ordernow">تأكيد الطلب</string>
     <string name="ordersuccess"> تمت إضافة طلبك بنجاح</string>
     <string name="debit">بطاقة الائتمان</string>
     <string name="perviousorder">االطلبات السابقة</string>
@@ -169,7 +169,7 @@
     <string name="taxes">الضرائب</string>
     <string name="delivry_price">مصاريف التوصيل</string>
     <string name="off">خصم</string>
-    <string name="in_stock">في المخزن</string>
+    <string name="in_stock">متوفر</string>
     <string name="wight">الوزن</string>
     <string name="noreviws">لا يوجد تقييمات</string>
     <string name="forget_label">نسيت كلمه المرور؟</string>
@@ -249,7 +249,7 @@
     <string name="related_product">المنتجات المماثلة</string>
 
 
-    <string name="add_cart">اضف الي السلة</string>
+    <string name="add_cart">اضف الي عربة التسوق</string>
     <string name="cu"> %s جنيه</string>
     <string name="sku">كود</string>
     <string name="moree">المزيد من المعلومات</string>
@@ -321,6 +321,9 @@
     <string name="t_bill">إجمالي الفاتورة</string>
     <string name="email_sentsucces">تم ارسال الي البريد الالكتروني بنجاح</string>
     <string name="wrong_email">البريد الالكتروني خطأ</string>
+    <string name="continuecartt">متابعة التسوق</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="last_name">الاسم الخير</string>
 
 
 </resources>
