@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".App"
@@ -16,8 +17,10 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.forgetpassword.ForgetPasswordActivity"
-            android:theme="@style/MyDialogTheme"></activity>
+        <activity android:name=".ui.payment.PaymentActivity"/>
+        <activity
+            android:name=".ui.forgetpassword.ForgetPasswordActivity"
+            android:theme="@style/MyDialogTheme" />
         <activity
             android:name=".ui.ordersuccess.OrderSuccessActivity"
             android:theme="@style/MyDialogTheme" />
@@ -62,8 +65,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />

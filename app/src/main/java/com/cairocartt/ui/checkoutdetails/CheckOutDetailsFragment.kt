@@ -1,6 +1,7 @@
 package com.cairocartt.ui.checkoutdetails
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
@@ -15,16 +16,21 @@ import androidx.navigation.navGraphViewModels
 import com.cairocartt.R
 import com.cairocartt.base.BaseDialogFragment
 import com.cairocartt.data.remote.model.ListCartResponse
+import com.cairocartt.data.remote.model.MessageEvent
 import com.cairocartt.data.remote.model.RequestCreateOrder
 import com.cairocartt.databinding.FragmentCheckOutDetailsBinding
 import com.cairocartt.databinding.FragmentCreateOrderBinding
 import com.cairocartt.ui.congratulition.CongratulitionCartActivity
 import com.cairocartt.ui.createorder.CreateOrderViewModel
 import com.cairocartt.ui.ordersuccess.OrderSuccessActivity
+import com.cairocartt.ui.payment.PaymentActivity
 import com.cairocartt.utils.SharedData
 import com.cairocartt.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.row_hero_product.view.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,6 +54,7 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
     private lateinit var Email:String
     private var data: SharedData? = null
     private var quta_id: String? = String()
+    var bundle: Bundle? = Bundle()
 
     val mViewModel: CreateOrderViewModel by navGraphViewModels(R.id.graph_home) {
         defaultViewModelProviderFactory
@@ -62,17 +69,27 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
     }
     private fun onClickOrder(){
         mViewDataBinding.BtnOrder.setOnClickListener(){
-            if(isLogin()){
-                mViewModel.createOrder(request = RequestCreateOrder(Email,RequestCreateOrder.PaymentMethod(paymentMethod)),
-                    token = token,cart_id = null
-                )
-            }else {
-                mViewModel.createOrder(request = RequestCreateOrder(Email,RequestCreateOrder.PaymentMethod(paymentMethod)),
-                    token = null,cart_id = quta_id ,
-                )
+            if(paymentMethod.equals("cashondelivery")){
+             var intent=Intent(requireContext(),PaymentActivity::class.java)
+                intent.putExtra("price",bundle?.getString("TotalPrice"))
+                intent.putExtra("email",bundle?.getString("Email"))
+
+                startActivity(intent)
+            }else if (paymentMethod.equals("payfort_fort_cc")){
+                createOrder()
             }
 
-
+        }
+    }
+    private fun createOrder(){
+        if(isLogin()){
+            mViewModel.createOrder(request = RequestCreateOrder(Email,RequestCreateOrder.PaymentMethod(paymentMethod)),
+                token = token,cart_id = null
+            )
+        }else {
+            mViewModel.createOrder(request = RequestCreateOrder(Email,RequestCreateOrder.PaymentMethod(paymentMethod)),
+                token = null,cart_id = quta_id ,
+            )
         }
     }
     private fun isLogin(): Boolean {
@@ -91,7 +108,6 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
                     var intent =Intent(requireContext(),OrderSuccessActivity::class.java)
                     intent.putExtra("id",it.data?.data)
                     startActivity(intent)
-
                 }
                 Status.LOADING -> {
                     showLoading()
@@ -113,21 +129,20 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
 
     @SuppressLint("SetTextI18n")
     private fun getData() {
-        var bundle: Bundle? = Bundle()
         bundle = this.arguments
         Email=bundle?.getString("Email")!!
         listCart = bundle?.getParcelable("listCart")!!
-        checkDiscountVisablity(bundle.getString("Discount")!!)
+        checkDiscountVisablity(bundle?.getString("Discount")!!)
         mViewDataBinding.model=listCart
-        mViewDataBinding.TCountry.text=bundle.getString("country_Name")
-        mViewDataBinding.TCity.text=bundle.getString("city_Name")
-        mViewDataBinding.TAddress.text=bundle.getString("Address")
-        mViewDataBinding.TEmail.text=bundle.getString("Email")
-        mViewDataBinding.TPhone.text=bundle.getString("phone")
-        mViewDataBinding.TDiscount.text=bundle.getString("Discount")+" "+resources.getString(R.string.currency)
-        mViewDataBinding.TotalOrder.text=bundle.getString("TotalPrice")+" "+resources.getString(R.string.currency)
-        mViewDataBinding.TTax.text=bundle.getString("tax")+" "+resources.getString(R.string.currency)
-        mViewDataBinding.Shipping.text=bundle.getString("ShippingPrice")+" "+resources.getString(R.string.currency)
+        mViewDataBinding.TCountry.text=bundle?.getString("country_Name")
+        mViewDataBinding.TCity.text=bundle?.getString("city_Name")
+        mViewDataBinding.TAddress.text=bundle?.getString("Address")
+        mViewDataBinding.TEmail.text=bundle?.getString("Email")
+        mViewDataBinding.TPhone.text=bundle?.getString("phone")
+        mViewDataBinding.TDiscount.text=bundle?.getString("Discount")+" "+resources.getString(R.string.currency)
+        mViewDataBinding.TotalOrder.text=bundle?.getString("TotalPrice")+" "+resources.getString(R.string.currency)
+        mViewDataBinding.TTax.text=bundle?.getString("tax")+" "+resources.getString(R.string.currency)
+        mViewDataBinding.Shipping.text=bundle?.getString("ShippingPrice")+" "+resources.getString(R.string.currency)
         mViewDataBinding.TDiscount.setPaintFlags(mViewDataBinding.TDiscount.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
     }
@@ -148,7 +163,22 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
         }else {
             paymentMethod="payfort_fort_cc"
         }
+    }
+
+    @Subscribe(sticky = false, threadMode = ThreadMode.BACKGROUND)
+    fun onMessageEvent(messsg: MessageEvent) {/* Do something */
+        if(messsg.Message.equals("order")){
+            createOrder()
+        }
+
+    };
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this)
+        }
 
     }
+
 
 }

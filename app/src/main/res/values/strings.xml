@@ -334,5 +334,7 @@
     <string name="email_sentsucces">Check your Email to reset your password</string>
     <string name="wrong_email">Email is not valid</string>
     <string name="continuecartt">Continue</string>
+    <string name="total_payment">Total Payment</string>
+    <string name="pay">Pay</string>
 
 </resources>

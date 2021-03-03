@@ -74,21 +74,38 @@ class ProductsPagination constructor(
             hashMap.put("searchCriteria[currentPage]", currentLoadingPageKey.toString())
             hashMap.put("searchCriteria[pageSize]", "10")
 
-//            if(!cat_id.isNullOrEmpty()) {
-//                cat_id?.let {
-//                    hashMap.put(
-//                        "searchCriteria[filterGroups][0][filters][0][value]",
-//                        it
-//                    )
-//                }
-//                hashMap.put("searchCriteria[filterGroups][0][filters][0][field]", "category_id")
-//                Log.e("brand view model", "  " + brand_id)
-//            }
+            if(!cat_id.isNullOrEmpty()) {
+                cat_id?.let {
+                    hashMap.put(
+                        "searchCriteria[filterGroups][0][filters][0][value]",
+                        it
+                    )
+                }
+                hashMap.put("searchCriteria[filterGroups][0][filters][0][field]", "category_id")
+            }
+
+
             if(!brand_id.isNullOrEmpty()){
                 hashMap.put("searchCriteria[filterGroups][0][filters][1][field]", "manufacturer")
                 brand_id?.let { hashMap.put("searchCriteria[filterGroups][0][filters][1][value]", it) }
             }
              Log.e("search_term",search_term.toString())
+
+
+            if(!min_Price.isNullOrEmpty() && min_Price!=null ){
+                Log.e("min_Price",min_Price.toString())
+
+                hashMap.put("searchCriteria[filterGroups][0][filters][2][field]", "price")
+                min_Price?.let { hashMap.put("searchCriteria[filterGroups][0][filters][2][value]", it) }
+                hashMap.put("searchCriteria[filterGroups][0][filters][2][condition_type]", "moreq")
+            }
+
+
+            if(!max_Price.isNullOrEmpty()  ) {
+                hashMap.put("searchCriteria[filterGroups][0][filters][3][field]", "price")
+                max_Price?.let { hashMap.put("searchCriteria[filterGroups][0][filters][3][value]", it) }
+                hashMap.put("searchCriteria[filterGroups][0][filters][3][condition_type]", "lteq")
+            }
 
 //            if(!search_term.isNullOrEmpty()){
 //                hashMap.put("searchCriteria[filterGroups][0][filters][1][field]", "search_term")
@@ -98,20 +115,7 @@ class ProductsPagination constructor(
 //            }
 
 
-//            if(!min_Price.isNullOrEmpty() && min_Price!=null ){
-//                Log.e("min_Price",min_Price.toString())
-//
-//                hashMap.put("searchCriteria[filterGroups][0][filters][2][field]", "price")
-//                min_Price?.let { hashMap.put("searchCriteria[filterGroups][0][filters][2][value]", it) }
-//                hashMap.put("searchCriteria[filterGroups][0][filters][2][condition_type]", "moreq")
-//            }
-//
-//
-//            if(!max_Price.isNullOrEmpty()  ) {
-//                hashMap.put("searchCriteria[filterGroups][0][filters][3][field]", "price")
-//                max_Price?.let { hashMap.put("searchCriteria[filterGroups][0][filters][3][value]", it) }
-//                hashMap.put("searchCriteria[filterGroups][0][filters][3][condition_type]", "lteq")
-//            }
+
 
 
             val response = dataCenterManager.getProductsById(

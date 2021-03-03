@@ -162,6 +162,7 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:ellipsize="end"
                             android:maxLines="1"
+                            android:visibility="gone"
                             android:textColor="@color/blue"
                             android:textSize="@dimen/_13sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -176,7 +177,6 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:background="@drawable/bc_ltoggle"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <RelativeLayout
@@ -227,7 +227,6 @@
                             android:textAllCaps="false"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/_11sdp"
-                            android:visibility="gone"
                             app:backgroundTint="#069EEC"
                             app:cornerRadius="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"

@@ -473,7 +473,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:buttonTint="@color/black"
-                                        android:visibility="gone"
                                         android:text="@string/debit"
                                         android:textColor="@color/black" />
 

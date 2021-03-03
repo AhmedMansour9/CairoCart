@@ -307,10 +307,10 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
     }
 
     override fun onClickFilter() {
-//        val newDialogFragment = FiltertionFragment()
-//        val transaction: FragmentTransaction =
-//            requireActivity().supportFragmentManager.beginTransaction()
-//        newDialogFragment.show(transaction, "New_Dialog_Fragment")
+        val newDialogFragment = FiltertionFragment()
+        val transaction: FragmentTransaction =
+            requireActivity().supportFragmentManager.beginTransaction()
+        newDialogFragment.show(transaction, "New_Dialog_Fragment")
     }
 
     override fun openHome() {

@@ -15,8 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:cardCornerRadius="@dimen/_25sdp"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
         app:cardElevation="0dp"
         app:elevation="0dp"
         >
@@ -77,13 +75,12 @@
                 android:layout_alignParentEnd="true"
                 android:text="@string/checkout"
                 android:layout_below="@+id/T_Message"
-                android:onClick="Btn_finish"
+                android:onClick="Btn_Cart"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_12sdp"
                 app:backgroundTint="#FF6584"
-                app:cornerRadius="30dp"
-                 />
+                app:cornerRadius="30dp" />
 
 
             <com.google.android.material.button.MaterialButton
@@ -96,7 +93,7 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:text="@string/continuecartt"
                 android:layout_below="@+id/T_Message"
-                android:onClick="Btn_Cart"
+                android:onClick="Btn_finish"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_10sdp"
