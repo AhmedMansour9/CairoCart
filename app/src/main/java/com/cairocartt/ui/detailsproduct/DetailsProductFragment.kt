@@ -498,7 +498,7 @@ class DetailsProductFragment : BaseDialogFragment<FragmentDetailsProductBinding>
             counter++
             mViewDataBinding.TQuantity.text = counter.toString()
             var total = totalPrice * counter
-            mViewDataBinding.TPrice.text = total.toString() + resources.getString(R.string.currency)
+//            mViewDataBinding.TPrice.text = total.toString() + resources.getString(R.string.currency)
         } else {
             Toast.makeText(
                 requireContext(),
@@ -517,7 +517,7 @@ class DetailsProductFragment : BaseDialogFragment<FragmentDetailsProductBinding>
             counter--
             mViewDataBinding.TQuantity.text = counter.toString()
             var total = totalPrice * counter
-            mViewDataBinding.TPrice.text = total.toString() + resources.getString(R.string.currency)
+//            mViewDataBinding.TPrice.text = total.toString() + resources.getString(R.string.currency)
         }
     }
 

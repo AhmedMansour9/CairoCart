@@ -326,6 +326,13 @@
     <string name="last_name">الاسم الخير</string>
     <string name="total_payment">المبلغ الإجمالي</string>
     <string name="pay">ادفع</string>
+    <string name="fast_delivery">شحن سريع</string>
+    <string name="every_place">لكل مكان في مصر</string>
+    <string name="ship_first">تقدر تدفع كاش او فيزا</string>
+    <string name="ship_second">استبدال و استرجاع خلال 100 يوم</string>
+    <string name="ship_third">قسط كل طلباتك لحد 60 شهر </string>
+    <string name="ship_fourth">هنوفرلك احسن سعر انت شوفته</string>
+    <string name="ship_fifth">للمساعدة, اتصل بنا 0109994431</string>
 
 
 </resources>

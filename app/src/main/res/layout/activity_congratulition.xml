@@ -67,7 +67,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="@dimen/_110sdp"
+                android:layout_width="@dimen/_95sdp"
                 android:layout_height="50dp"
                 android:fontFamily="@font/product_sans_bold"
                 android:layout_marginEnd="@dimen/_20sdp"
@@ -86,7 +86,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btncart"
                 style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="@dimen/_110sdp"
+                android:layout_width="@dimen/_95sdp"
                 android:layout_height="50dp"
                 android:fontFamily="@font/product_sans_bold"
                 android:layout_marginStart="@dimen/_20sdp"

@@ -31,6 +31,8 @@ data class ProductsResponse(
         var customAttributes: List<CustomAttribute?>?,
         @SerializedName("description")
         var description: String?,
+        @SerializedName("brand_name")
+        var brand_name: String?,
         @SerializedName("has_cross_sell_products")
         var hasCrossSellProducts: Boolean?,
         @SerializedName("has_related_products")

@@ -336,5 +336,12 @@
     <string name="continuecartt">Continue</string>
     <string name="total_payment">Total Payment</string>
     <string name="pay">Pay</string>
+    <string name="fast_delivery">EXPRESS SHIPPING</string>
+    <string name="every_place">ANYWHERE, INSIDE EGYPT</string>
+    <string name="ship_first">Cash &amp; credit payments</string>
+    <string name="ship_second">100-Day money back guarantee</string>
+    <string name="ship_third"> Pay via Installments </string>
+    <string name="ship_fourth">Original products with full warranty</string>
+    <string name="ship_fifth"> Call us anytime on 01099944331</string>
 
 </resources>
