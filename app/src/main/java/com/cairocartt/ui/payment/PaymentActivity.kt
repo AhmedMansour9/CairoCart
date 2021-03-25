@@ -223,7 +223,6 @@ class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
                         Log.d(TAG, p0.toString())
                         Log.d(TAG, p1.toString())
                         Toast.makeText(this@PaymentActivity, "Error: ${p1?.get("response_message")}", Toast.LENGTH_LONG).show()
-
                     }
 
                     override fun onCancel(p0: MutableMap<String, Any>?, p1: MutableMap<String, Any>?) {

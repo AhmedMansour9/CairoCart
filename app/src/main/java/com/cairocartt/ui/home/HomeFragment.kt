@@ -159,8 +159,6 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>(), SwipeRefreshLayout.On
         val transaction: FragmentTransaction =
             requireActivity().supportFragmentManager.beginTransaction()
         newDialogFragment.show(transaction, "New_Dialog_Fragment")
-
-
     }
 
 
