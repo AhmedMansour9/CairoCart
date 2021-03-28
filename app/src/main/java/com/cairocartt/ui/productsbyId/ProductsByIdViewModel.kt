@@ -26,7 +26,7 @@ import kotlin.collections.HashMap
 class ProductsByIdViewModel @ViewModelInject constructor(dataCenterManager: DataCenterManager) :
     BaseViewModel<ProductByIdNavigator>(dataCenterManager) {
 
-    var filter = MutableLiveData<FilterModel>()
+    var filter = MutableLiveData<MutableList<FilterResponse.Data.Value>>()
 
 
 

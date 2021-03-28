@@ -11,9 +11,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cairocartt.R
 import com.cairocartt.data.remote.model.FilterResponse
+import com.cairocartt.data.remote.model.MyOrdersResponse
 
 
-class FilterAdapter(val context: Context, val data: List<FilterResponse.Data>) :
+class FilterAdapter(val context: Context, val data: List<FilterResponse.Data>,var itemclick: FilterItemListner) :
     BaseExpandableListAdapter() {
 
     override fun getGroupCount(): Int {
@@ -60,10 +61,6 @@ class FilterAdapter(val context: Context, val data: List<FilterResponse.Data>) :
         val img_arrow_up: ImageView? = convertView?.findViewById(R.id.bt_toggle_brand)
         val T_Title: TextView? = convertView?.findViewById(R.id.T_Title)
         T_Title?.text = title
-//       img_arrow_up?.setOnClickListener(){
-//
-//
-//       }
         if(isExpanded){
             img_arrow_up?.animate()?.setDuration(200)?.rotation(180f)
         }else {
@@ -74,16 +71,6 @@ class FilterAdapter(val context: Context, val data: List<FilterResponse.Data>) :
         return convertView
     }
 
-
-    fun toggleArrow(view: View): Boolean {
-        return if (view.rotation == 0f) {
-            view.animate().setDuration(200).rotation(180f)
-            true
-        } else {
-            view.animate().setDuration(200).rotation(0f)
-            false
-        }
-    }
 
     override fun getChildView(
         groupPosition: Int,
@@ -101,7 +88,7 @@ class FilterAdapter(val context: Context, val data: List<FilterResponse.Data>) :
         val recycle: RecyclerView
         val adapter: ChildFilterAdapter
         recycle = convertView!!.findViewById(R.id.recycle)
-        adapter = ChildFilterAdapter(context, data.get(groupPosition).values,data.get(groupPosition).field)
+        adapter = ChildFilterAdapter(context, data.get(groupPosition).values,data.get(groupPosition).field,itemclick)
         recycle.adapter = adapter
         adapter.notifyDataSetChanged()
         recycle.scheduleLayoutAnimation()
@@ -110,5 +97,9 @@ class FilterAdapter(val context: Context, val data: List<FilterResponse.Data>) :
 
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean {
         return true
+    }
+
+    interface FilterItemListner {
+        fun onclick(Field:String,filter :FilterResponse.Data.Value)
     }
 }

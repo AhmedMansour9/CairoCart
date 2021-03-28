@@ -28,13 +28,14 @@ data class FilterResponse(
         @Parcelize
         data class Value(
             @SerializedName("checked")
-            var checked: Boolean?,
+            var checked: Boolean?=null,
             @SerializedName("count")
-            var count: Int?,
+            var count: Int?=null,
             @SerializedName("label")
-            var label: String?,
+            var label: String?=null,
             @SerializedName("value")
-            var value: String?
+            var value: String?=null,
+            var field: String?=null
         ) : Parcelable
     }
 

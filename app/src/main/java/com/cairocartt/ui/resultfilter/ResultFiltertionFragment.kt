@@ -128,10 +128,10 @@ class ResultFiltertionFragment : BaseFragment<FragmentResultFiltertionBinding>()
 
     private fun getData() {
         bundle = this.requireArguments()
-        mViewModel.category_Id.value=bundle.getString("cat_Id")
-        mViewModel.brand_Id.value=bundle.getString("brand_Id")
-        mViewModel.min_Price.value=bundle.getString("min_Price")
-        mViewModel.max_Price.value=bundle.getString("max_Price")
+//        mViewModel.category_Id.value=bundle.getString("cat_Id")
+//        mViewModel.brand_Id.value=bundle.getString("brand_Id")
+//        mViewModel.min_Price.value=bundle.getString("min_Price")
+//        mViewModel.max_Price.value=bundle.getString("max_Price")
         mViewModel.search_term.value=bundle.getString("search")
 
         mViewModel.Lang.value = ChangeLanguage.getLanguage(requireContext())

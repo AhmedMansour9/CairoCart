@@ -9,6 +9,7 @@ import androidx.paging.PagingSource
 import com.cairocartt.base.BaseActivity
 import com.cairocartt.base.BaseViewModel
 import com.cairocartt.data.DataCenterManager
+import com.cairocartt.data.remote.model.FilterResponse
 import com.cairocartt.data.remote.model.ProductsResponse
 import com.cairocartt.ui.bottomnavigate.BottomNavigateFragment
 import com.cairocartt.ui.productsbyId.ProductByIdNavigator
@@ -18,11 +19,13 @@ class ResultFitertionViewModel @ViewModelInject constructor(dataCenterManager: D
     var checkChanges = MutableLiveData<Boolean>()
     var Lang = MutableLiveData<String>()
     var userId = MutableLiveData<String>()
-    var category_Id = MutableLiveData<String>()
-    var brand_Id = MutableLiveData<String>()
-    var min_Price = MutableLiveData<String>()
-    var max_Price = MutableLiveData<String>()
+//    var category_Id = MutableLiveData<String>()
+//    var brand_Id = MutableLiveData<String>()
+//    var min_Price = MutableLiveData<String>()
+//    var max_Price = MutableLiveData<String>()
     var search_term = MutableLiveData<String>()
+
+    var filter = MutableLiveData<MutableList<FilterResponse.Data.Value>>()
 
 
 
@@ -30,9 +33,8 @@ class ResultFitertionViewModel @ViewModelInject constructor(dataCenterManager: D
         ProductsPagination(
             dataCenterManager,
             search_term.value.toString(),
-            category_Id.value.toString(),
-            userId.value.toString(),
-            Lang.value.toString(),brand_Id.value.toString(),min_Price.value.toString(),max_Price.value.toString()
+            filter,
+            Lang.value.toString()
         )
     }.flow
     init {
@@ -42,7 +44,7 @@ class ResultFitertionViewModel @ViewModelInject constructor(dataCenterManager: D
 }
 
 class ProductsPagination constructor(
-    dataCenterManager: DataCenterManager,search_term:String?, categoryId: String, userId: String, Lang: String,brand_Id:String?,min_Price:String?,max_Price:String?
+    dataCenterManager: DataCenterManager,search_term:String?,list:MutableList<FilterResponse.Data.Value>, userId: String, Lang: String
 ) :
     PagingSource<Int, ProductsResponse.Data>() {
     var cat_id:String?= String()
@@ -51,16 +53,14 @@ class ProductsPagination constructor(
     var max_Price :String?= String()
     var search_term :String?= String()
 
+    var list:
+
     var dataCenterManager: DataCenterManager
     var lang: String
     var userId: String
 
     init {
         this.search_term = search_term
-        this.brand_id = brand_Id
-        this.min_Price = min_Price
-        this.max_Price = max_Price
-        this.cat_id = categoryId
         this.lang = Lang
         this.dataCenterManager = dataCenterManager
         this.userId = userId

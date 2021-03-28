@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.EventBus
 class ChildFilterAdapter(
     var context: Context,
     var mListCart: MutableList<FilterResponse.Data.Value>,
-    var category_id: String
+    var category_id: String,var itemclick:FilterAdapter.FilterItemListner
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var lastSelectedPosition = -1
@@ -71,7 +71,7 @@ class ChildFilterAdapter(
             itemView.setOnClickListener(){
                 lastSelectedPosition = position
                 run {
-//                    categoryData.itemClicked(mListModel?.get(position)!!)
+                    itemclick.onclick(category_id,mListCart.get(position))
                 }
                 notifyDataSetChanged();
             }

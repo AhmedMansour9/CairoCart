@@ -38,6 +38,7 @@ import com.cairocartt.ui.nointernet.NoInternertActivity
 import com.cairocartt.ui.detailsproduct.DetailsProductViewModel
 import com.cairocartt.ui.filter.FiltertionFragment
 import com.cairocartt.ui.login.LoginActivity
+import com.cairocartt.ui.resultfilter.ResultFitertionViewModel
 import com.cairocartt.ui.subcategories.FeaturedViewModel
 import com.cairocartt.utils.SharedData
 import com.cairocartt.utils.Status
@@ -72,6 +73,8 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
     val mViewModel: ProductsByIdViewModel by navGraphViewModels(R.id.graph_home) {
         defaultViewModelProviderFactory
     }
+
+    val mViewModelFilter: ResultFitertionViewModel by viewModels ()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -522,13 +525,9 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
     private fun subscribeFiltertion() {
         mViewModel.filter.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                val bundle2 = Bundle()
-                bundle2.putString("cat_Id", it.cat_Id)
-                bundle2.putString("brand_Id", it.brand_Id)
-                bundle2.putString("min_Price", it.min_Price)
-                bundle2.putString("max_Price", it.max_Price)
+                mViewModelFilter.filter.value=it
                 Navigation.findNavController(mViewDataBinding.root)
-                    .navigate(R.id.action_productsById_to_resultFiltertionFragment, bundle2);
+                    .navigate(R.id.action_productsById_to_resultFiltertionFragment);
                 mViewModel.filter.value = null
             }
         })

@@ -45,9 +45,11 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
     private var data: SharedData? = null
     private var cat_Id: String? = String()
     private var brand_Id: String? = String()
-    lateinit var filter:FilterResponse
-
-
+    lateinit var filter: FilterResponse
+    var list: MutableList<FilterResponse.Data.Value> = mutableListOf()
+    val mViewModel: ProductsByIdViewModel by navGraphViewModels(R.id.graph_home) {
+        defaultViewModelProviderFactory
+    }
     //    private var catAdapter =
 //        CatgoriesFliterAdapter(object : CatgoriesFliterAdapter.CategoryItemListener {
 //            override fun itemClicked(productData: CategoriesResponse.DataCategory.ChildrenDataa) {
@@ -72,25 +74,53 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
         var bundle = Bundle()
         bundle = requireArguments()
         filter = bundle.getParcelable("data")!!
-        catAdapter = FilterAdapter(requireContext(), filter.data)
+        catAdapter =
+            FilterAdapter(requireContext(), filter.data, object : FilterAdapter.FilterItemListner {
+                override fun onclick(Field: String, filter: FilterResponse.Data.Value) {
+                    filter.field=Field
+                    addList(Field,filter)
+                }
+
+            })
         mViewDataBinding.recyclerCategroies.setAdapter(catAdapter)
 
-//        mViewDataBinding.recyclerCategroies.setOnGroupClickListener { parent, v, groupPosition, id ->
-//            Toast.makeText(requireContext(), ""+filter.data.get(groupPosition).label, Toast.LENGTH_SHORT).show()
-//           parent.expandableListAdapter
-//            return@setOnGroupClickListener false
-//        }
-//        mViewDataBinding.recyclerCategroies.setOnGroupExpandListener{
-//
-//        }
         mViewDataBinding.recyclerCategroies.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
 
-            Toast.makeText(requireContext(), ""+filter.data.get(groupPosition).values.get(childPosition).label, Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "" + filter.data.get(groupPosition).values.get(childPosition).label,
+                Toast.LENGTH_SHORT
+            ).show()
+
             return@setOnChildClickListener false
         }
 
 
     }
+
+    private fun addList(Field: String, filter: FilterResponse.Data.Value) {
+        if (!list.isNullOrEmpty()) {
+            list.forEachIndexed { index, value ->
+                if (list.get(index).label.equals(filter.label)) {
+                    return
+                } else {
+                    list.forEachIndexed { index2, value2 ->
+                        run {
+                            if (list.get(index2).field.equals(Field)) {
+                                list.removeAt(index2)
+                            }
+                        }
+                    }
+
+                    list.add(filter)
+                    return
+                }
+            }
+        }else {
+            list.add(filter)
+        }
+    }
+
     private fun onchangeSeekBar() {
         mViewDataBinding.seekbar.setOnRangeSeekbarChangeListener(object :
             OnRangeSeekbarChangeListener {
@@ -102,7 +132,6 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
             }
         });
     }
-
 
 
     override fun onClickToggleCategory() {
@@ -132,13 +161,8 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
     }
 
     override fun onCLickFinish() {
-        val filter = (FilterModel(
-            cat_Id,
-            brand_Id,
-            mViewDataBinding.seekbar.selectedMinValue.toString(),
-            mViewDataBinding.seekbar.selectedMaxValue.toString()
-        ))
-//        mViewModelShared.filter.value=filter
+
+        mViewModel.filter.value=list
         dismiss()
     }
 
