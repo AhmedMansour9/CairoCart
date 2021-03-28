@@ -52,6 +52,11 @@ class ApiRepository @Inject constructor(private val apiService: ApiService) : Ap
     ): Response<ProductsResponse> =
         apiService.fetchProductsById(language, token, userId, map,firebase)
 
+    override  fun fetchFilterData(
+        language: String,
+        map: Map<String, String>
+    ): Call<FilterResponse> = apiService.fetchFilterData(language, map)
+
     override fun fetchDetailsProducts(
         language: String,
         token: String,
@@ -145,5 +150,9 @@ class ApiRepository @Inject constructor(private val apiService: ApiService) : Ap
 
     override fun getMyOrders(language: String,@Header("Authorization")token:String,firebase:String?):
             Call<MyOrdersResponse> =  apiService.getMyOrders(language,token,firebase)
+
+    override fun confirmPayment(request: RequestConfirmPayment): Call<ConfirmPaymentResponse> =
+        apiService.confirmPayment(request)
+
 
 }

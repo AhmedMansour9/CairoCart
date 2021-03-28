@@ -10,9 +10,17 @@ import com.cairocartt.base.BaseActivity
 import com.cairocartt.base.BaseViewModel
 import com.cairocartt.data.DataCenterManager
 import com.cairocartt.data.remote.model.FilterModel
+import com.cairocartt.data.remote.model.FilterResponse
+import com.cairocartt.data.remote.model.MyOrdersResponse
 import com.cairocartt.data.remote.model.ProductsResponse
 import com.cairocartt.ui.bottomnavigate.BottomNavigateFragment
+import com.cairocartt.utils.Resource
+import retrofit2.Call
+import retrofit2.Response
+import java.util.*
 import javax.inject.Singleton
+import javax.security.auth.callback.Callback
+import kotlin.collections.HashMap
 
 @Singleton
 class ProductsByIdViewModel @ViewModelInject constructor(dataCenterManager: DataCenterManager) :
@@ -38,6 +46,41 @@ class ProductsByIdViewModel @ViewModelInject constructor(dataCenterManager: Data
 
     }
 
+    private val _filtersResponse = MutableLiveData<Resource<FilterResponse>>()
+    val filtersResponse: LiveData<Resource<FilterResponse>>
+        get() = _filtersResponse
+
+    fun getFilters() {
+        var hashMap = HashMap<String, String>()
+        hashMap.put("searchCriteria[filterGroups][0][filters][0][value]",category_Id.value.toString())
+        hashMap.put("searchCriteria[filterGroups][0][filters][0][field]", "category_id")
+        _filtersResponse.postValue(Resource.loading(null))
+        dataCenterManager.fetchFilterData(Lang.value.toString() ,hashMap)
+            .enqueue(object :
+                Callback, retrofit2.Callback<FilterResponse> {
+                override fun onResponse(
+                    call: Call<FilterResponse>,
+                    response: Response<FilterResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        if (response.body()?.status?.code == 200) {
+                            _filtersResponse.postValue(Resource.success(response.body()))
+                        } else {
+                            _filtersResponse.postValue(
+                                Resource.error(
+                                    response.body()?.status?.code.toString(),
+                                    null
+                                )
+                            )
+                        }
+                    } else
+                        _filtersResponse.postValue(Resource.error(response.message(), null))
+                }
+                override fun onFailure(call: Call<FilterResponse>, t: Throwable) {
+                    _filtersResponse.postValue(Resource.error(t.message.toString(), null))
+                }
+            })
+    }
 
     var listData = Pager(PagingConfig(pageSize = 10)) {
         ProductsPagination(

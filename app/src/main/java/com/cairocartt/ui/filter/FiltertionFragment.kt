@@ -3,6 +3,7 @@ package com.cairocartt.ui.filter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,10 +11,12 @@ import com.cairocartt.ChangeLanguage
 import com.cairocartt.R
 import com.cairocartt.adapter.BrandsFiltertionAdapter
 import com.cairocartt.adapter.CatgoriesFliterAdapter
+import com.cairocartt.adapter.FilterAdapter
 import com.cairocartt.base.BaseDialogFragment
 import com.cairocartt.data.remote.model.Brands_Response
 import com.cairocartt.data.remote.model.CategoriesResponse
 import com.cairocartt.data.remote.model.FilterModel
+import com.cairocartt.data.remote.model.FilterResponse
 import com.cairocartt.databinding.FragmentDetailsProductBinding
 import com.cairocartt.databinding.FragmentFiltertionBinding
 import com.cairocartt.ui.productsbyId.ProductsByIdViewModel
@@ -38,138 +41,75 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
 
     override var idLayoutRes: Int = R.layout.fragment_filtertion
 
+
     private var data: SharedData? = null
-    private var cat_Id:String?= String()
-    private var brand_Id:String?= String()
-
-    val mViewModelShared: ProductsByIdViewModel by navGraphViewModels(R.id.graph_home) {
-        defaultViewModelProviderFactory
-    }
+    private var cat_Id: String? = String()
+    private var brand_Id: String? = String()
+    lateinit var filter:FilterResponse
 
 
-    val mViewModel: FiltertionViewModel by navGraphViewModels(R.id.graph_home) {
-        defaultViewModelProviderFactory
-    }
-    private var catAdapter =
-        CatgoriesFliterAdapter(object : CatgoriesFliterAdapter.CategoryItemListener {
-            override fun itemClicked(productData: CategoriesResponse.DataCategory.ChildrenDataa) {
-                cat_Id=productData.id.toString()
-                mViewDataBinding.TCategory.text=productData.name
-                checkedToggleCategory()
-                checkedToggleBrand()
-            }
+    //    private var catAdapter =
+//        CatgoriesFliterAdapter(object : CatgoriesFliterAdapter.CategoryItemListener {
+//            override fun itemClicked(productData: CategoriesResponse.DataCategory.ChildrenDataa) {
+//                cat_Id=productData.id.toString()
+//                mViewDataBinding.TCategory.text=productData.name
+//                checkedToggleCategory()
+//                checkedToggleBrand()
+//            }
+//
+//        })
+//
+    private lateinit var catAdapter: FilterAdapter
 
-        })
-
-    private var brandAdapter =
-        BrandsFiltertionAdapter(object : BrandsFiltertionAdapter.BrandtemListener {
-            override fun itemClicked(productData: Brands_Response.Data) {
-                brand_Id=productData.optionId.toString()
-                mViewDataBinding.TBrand.text=productData.title
-                checkedToggleBrand()
-            }
-        })
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initRecycleCategory()
-        initRecycleBrand()
-        initRecycleBrand()
-        init()
-        categoryObserver()
-        brandObserver()
+        getData()
         onchangeSeekBar()
     }
 
+    private fun getData() {
+        var bundle = Bundle()
+        bundle = requireArguments()
+        filter = bundle.getParcelable("data")!!
+        catAdapter = FilterAdapter(requireContext(), filter.data)
+        mViewDataBinding.recyclerCategroies.setAdapter(catAdapter)
+
+//        mViewDataBinding.recyclerCategroies.setOnGroupClickListener { parent, v, groupPosition, id ->
+//            Toast.makeText(requireContext(), ""+filter.data.get(groupPosition).label, Toast.LENGTH_SHORT).show()
+//           parent.expandableListAdapter
+//            return@setOnGroupClickListener false
+//        }
+//        mViewDataBinding.recyclerCategroies.setOnGroupExpandListener{
+//
+//        }
+        mViewDataBinding.recyclerCategroies.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
+
+            Toast.makeText(requireContext(), ""+filter.data.get(groupPosition).values.get(childPosition).label, Toast.LENGTH_SHORT).show()
+            return@setOnChildClickListener false
+        }
 
 
+    }
     private fun onchangeSeekBar() {
-        mViewDataBinding.seekbar.setOnRangeSeekbarChangeListener(object :OnRangeSeekbarChangeListener {
-            override fun valueChanged(minValue:Number, maxValue:Number ) {
-                mViewDataBinding.TMinPrice.text=minValue.toString() +" " + resources.getString(R.string.currency)
-                mViewDataBinding.TMax.text=maxValue.toString() +" " + resources.getString(R.string.currency)
+        mViewDataBinding.seekbar.setOnRangeSeekbarChangeListener(object :
+            OnRangeSeekbarChangeListener {
+            override fun valueChanged(minValue: Number, maxValue: Number) {
+                mViewDataBinding.TMinPrice.text =
+                    minValue.toString() + " " + resources.getString(R.string.currency)
+                mViewDataBinding.TMax.text =
+                    maxValue.toString() + " " + resources.getString(R.string.currency)
             }
         });
     }
 
 
-    private fun initRecycleCategory() {
-        mViewDataBinding.recyclerCategroies.setHasFixedSize(true)
-        mViewDataBinding.recyclerCategroies.setLayoutManager(
-            LinearLayoutManager(
-                requireContext()
-            )
-        )
-        mViewDataBinding.recyclerCategroies.adapter = catAdapter
 
-    }
-
-    private fun initRecycleBrand() {
-        mViewDataBinding.recyclerBrand.setHasFixedSize(true)
-        mViewDataBinding.recyclerBrand.setLayoutManager(
-            LinearLayoutManager(
-                requireContext()
-            )
-        )
-        mViewDataBinding.recyclerBrand.adapter = brandAdapter
-
-    }
-
-
-    private fun init() {
-        mViewModel.Lang.value = ChangeLanguage.getLanguage(requireContext())
-        data = SharedData(requireContext())
-        mViewModel.navigator = this
-        mViewDataBinding.viewmodel = mViewModel
-    }
-
-    private fun categoryObserver() {
-        mViewModel.categoryResponse.observe(this, Observer {
-            when (it.staus) {
-                Status.SUCCESS -> {
-                    dismissLoading()
-                    addData(it.data?.data?.childrenData as MutableList<CategoriesResponse.DataCategory.ChildrenDataa>)
-                }
-                Status.LOADING -> {
-                    showLoading()
-                }
-                Status.ERROR -> {
-                    dismissLoading()
-                }
-            }
-        })
-    }
-
-    private fun brandObserver() {
-        mViewModel.brandResponse.observe(this, Observer {
-            when (it.staus) {
-                Status.SUCCESS -> {
-                    dismissLoading()
-                    addDataBrand(it.data?.data as MutableList<Brands_Response.Data>)
-                }
-                Status.LOADING -> {
-                    showLoading()
-                }
-                Status.ERROR -> {
-                    dismissLoading()
-                }
-            }
-        })
-    }
-
-    private fun addData(data: MutableList<CategoriesResponse.DataCategory.ChildrenDataa>) {
-        catAdapter.setList(data)
-
-    }
-
-    private fun addDataBrand(data: MutableList<Brands_Response.Data>) {
-        brandAdapter.setList(data)
-
-    }
     override fun onClickToggleCategory() {
-      checkedToggleCategory()
+        checkedToggleCategory()
     }
-    private fun checkedToggleCategory(){
+
+    private fun checkedToggleCategory() {
         var checked = toggleArrow(mViewDataBinding.btToggleCategory)
         if (checked) {
             mViewDataBinding.lytExpandCategory.visibility = View.VISIBLE
@@ -179,9 +119,10 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
     }
 
     override fun onClickToggleBrand() {
-       checkedToggleBrand()
+        checkedToggleBrand()
     }
-    private fun checkedToggleBrand(){
+
+    private fun checkedToggleBrand() {
         var checked = toggleArrow(mViewDataBinding.btToggleBrand)
         if (checked) {
             mViewDataBinding.lytExpandBrand.visibility = View.VISIBLE
@@ -191,16 +132,19 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
     }
 
     override fun onCLickFinish() {
-        val filter=(FilterModel(cat_Id,brand_Id,mViewDataBinding.seekbar.selectedMinValue.toString(),mViewDataBinding.seekbar.selectedMaxValue.toString()))
-        mViewModelShared.filter.value=filter
+        val filter = (FilterModel(
+            cat_Id,
+            brand_Id,
+            mViewDataBinding.seekbar.selectedMinValue.toString(),
+            mViewDataBinding.seekbar.selectedMaxValue.toString()
+        ))
+//        mViewModelShared.filter.value=filter
         dismiss()
     }
 
     override fun clearAll() {
-        catAdapter.lastSelectedPosition=-1
-        catAdapter.notifyDataSetChanged()
-        brandAdapter.lastSelectedPosition=-1
-        brandAdapter.notifyDataSetChanged()
+//        catAdapter.lastSelectedPosition = -1
+//        catAdapter.notifyDataSetChanged()
 
     }
 

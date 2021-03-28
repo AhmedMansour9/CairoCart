@@ -10,11 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 import com.cairocartt.R
 import com.cairocartt.base.BaseDialogFragment
+import com.cairocartt.data.remote.model.CreateOrderResponse
 import com.cairocartt.data.remote.model.ListCartResponse
 import com.cairocartt.data.remote.model.MessageEvent
 import com.cairocartt.data.remote.model.RequestCreateOrder
@@ -44,14 +46,13 @@ private const val ARG_PARAM2 = "param2"
  */
 
 
-
 @AndroidEntryPoint
 class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBinding>() {
     private var token: String? = String()
-    override var idLayoutRes: Int=R.layout.fragment_check_out_details
+    override var idLayoutRes: Int = R.layout.fragment_check_out_details
     private lateinit var listCart: ListCartResponse.Data
-    private  var paymentMethod:String="cashondelivery"
-    private lateinit var Email:String
+    private var paymentMethod: String = "cashondelivery"
+    private lateinit var Email: String
     private var data: SharedData? = null
     private var quta_id: String? = String()
     var bundle: Bundle? = Bundle()
@@ -59,39 +60,45 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
     val mViewModel: CreateOrderViewModel by navGraphViewModels(R.id.graph_home) {
         defaultViewModelProviderFactory
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         init()
         getData()
-        checkRadioButton()
+        onClickRadioButton()
         onClickOrder()
         subscribeCheckOut()
     }
-    private fun onClickOrder(){
-        mViewDataBinding.BtnOrder.setOnClickListener(){
-            if(paymentMethod.equals("cashondelivery")){
-             var intent=Intent(requireContext(),PaymentActivity::class.java)
-                intent.putExtra("price",bundle?.getString("TotalPrice"))
-                intent.putExtra("email",bundle?.getString("Email"))
 
-                startActivity(intent)
-            }else if (paymentMethod.equals("payfort_fort_cc")){
-                createOrder()
-            }
+    private fun onClickOrder() {
+        mViewDataBinding.BtnOrder.setOnClickListener() {
+
+            createOrder()
+
 
         }
     }
-    private fun createOrder(){
-        if(isLogin()){
-            mViewModel.createOrder(request = RequestCreateOrder(Email,RequestCreateOrder.PaymentMethod(paymentMethod)),
-                token = token,cart_id = null
+
+    private fun createOrder() {
+        if (isLogin()) {
+            mViewModel.createOrder(
+                request = RequestCreateOrder(
+                    Email,
+                    RequestCreateOrder.PaymentMethod(paymentMethod)
+                ),
+                token = token, cart_id = null
             )
-        }else {
-            mViewModel.createOrder(request = RequestCreateOrder(Email,RequestCreateOrder.PaymentMethod(paymentMethod)),
-                token = null,cart_id = quta_id ,
+        } else {
+            mViewModel.createOrder(
+                request = RequestCreateOrder(
+                    Email,
+                    RequestCreateOrder.PaymentMethod(paymentMethod)
+                ),
+                token = null, cart_id = quta_id,
             )
         }
     }
+
     private fun isLogin(): Boolean {
         token = data?.getValue(SharedData.ReturnValue.STRING, "token")
         if (token.isNullOrEmpty()) {
@@ -99,15 +106,13 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
         }
         return true
     }
+
     private fun subscribeCheckOut() {
         mViewModel.createOrderResponse.observe(this, Observer {
             when (it.staus) {
                 Status.SUCCESS -> {
                     dismissLoading()
-                    data?.putValue("quta_id","")
-                    var intent =Intent(requireContext(),OrderSuccessActivity::class.java)
-                    intent.putExtra("id",it.data?.data)
-                    startActivity(intent)
+                    successOrder(it.data)
                 }
                 Status.LOADING -> {
                     showLoading()
@@ -120,54 +125,79 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
         })
     }
 
+    private fun successOrder(it: CreateOrderResponse?) {
+        data?.putValue("quta_id", "")
+
+        if (paymentMethod.equals("cashondelivery")) {
+            var intent = Intent(requireContext(), OrderSuccessActivity::class.java)
+            intent.putExtra("id", it?.data)
+            startActivity(intent)
+        } else if (paymentMethod.equals("payfort_fort_cc")) {
+            var intent = Intent(requireContext(), PaymentActivity::class.java)
+            intent.putExtra("price", bundle?.getString("TotalPrice"))
+            intent.putExtra("email", bundle?.getString("Email"))
+            intent.putExtra("order_id", it?.data)
+            startActivity(intent)
+        }
+    }
+
     private fun init() {
         data = SharedData(requireContext())
         token = data?.getValue(SharedData.ReturnValue.STRING, "token")
-        quta_id=data?.getValue(SharedData.ReturnValue.STRING, "quta_id")
+        quta_id = data?.getValue(SharedData.ReturnValue.STRING, "quta_id")
 
     }
 
     @SuppressLint("SetTextI18n")
     private fun getData() {
         bundle = this.arguments
-        Email=bundle?.getString("Email")!!
+        Email = bundle?.getString("Email")!!
         listCart = bundle?.getParcelable("listCart")!!
         checkDiscountVisablity(bundle?.getString("Discount")!!)
-        mViewDataBinding.model=listCart
-        mViewDataBinding.TCountry.text=bundle?.getString("country_Name")
-        mViewDataBinding.TCity.text=bundle?.getString("city_Name")
-        mViewDataBinding.TAddress.text=bundle?.getString("Address")
-        mViewDataBinding.TEmail.text=bundle?.getString("Email")
-        mViewDataBinding.TPhone.text=bundle?.getString("phone")
-        mViewDataBinding.TDiscount.text=bundle?.getString("Discount")+" "+resources.getString(R.string.currency)
-        mViewDataBinding.TotalOrder.text=bundle?.getString("TotalPrice")+" "+resources.getString(R.string.currency)
-        mViewDataBinding.TTax.text=bundle?.getString("tax")+" "+resources.getString(R.string.currency)
-        mViewDataBinding.Shipping.text=bundle?.getString("ShippingPrice")+" "+resources.getString(R.string.currency)
+        mViewDataBinding.model = listCart
+        mViewDataBinding.TCountry.text = bundle?.getString("country_Name")
+        mViewDataBinding.TCity.text = bundle?.getString("city_Name")
+        mViewDataBinding.TAddress.text = bundle?.getString("Address")
+        mViewDataBinding.TEmail.text = bundle?.getString("Email")
+        mViewDataBinding.TPhone.text = bundle?.getString("phone")
+        mViewDataBinding.TDiscount.text =
+            bundle?.getString("Discount") + " " + resources.getString(R.string.currency)
+        mViewDataBinding.TotalOrder.text =
+            bundle?.getString("TotalPrice") + " " + resources.getString(R.string.currency)
+        mViewDataBinding.TTax.text =
+            bundle?.getString("tax") + " " + resources.getString(R.string.currency)
+        mViewDataBinding.Shipping.text =
+            bundle?.getString("ShippingPrice") + " " + resources.getString(R.string.currency)
         mViewDataBinding.TDiscount.setPaintFlags(mViewDataBinding.TDiscount.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
     }
-    private fun checkDiscountVisablity(discount:String){
-        if(discount.equals("0.0")){
-            mViewDataBinding.TDiscount.visibility=View.GONE
-            mViewDataBinding.diescount.visibility=View.GONE
+
+    private fun checkDiscountVisablity(discount: String) {
+        if (discount.equals("0.0")) {
+            mViewDataBinding.TDiscount.visibility = View.GONE
+            mViewDataBinding.diescount.visibility = View.GONE
         }
     }
-    private fun checkRadioButton(){
-        var id: Int = mViewDataBinding.radios.getCheckedRadioButtonId()
-        val radioButton: View = mViewDataBinding.radios.findViewById(id)
-        val radioId = mViewDataBinding.radios.indexOfChild(radioButton)
-        val btn = mViewDataBinding.radios.getChildAt(radioId) as RadioButton
-        val selection = btn.text as String
-        if (selection == "Cash On Delivery"  || selection == "نقدي") {
-            paymentMethod="cashondelivery"
-        }else {
-            paymentMethod="payfort_fort_cc"
-        }
+
+
+    fun onClickRadioButton() {
+
+        mViewDataBinding.radios.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                val radio: RadioButton = mViewDataBinding.radios.findViewById(checkedId)
+                if (radio.text.equals("Cash On Delivery") || radio.text.equals("نقدي")) {
+                    paymentMethod = "cashondelivery"
+
+                } else if (radio.text.equals("Credit / Debit Card") || radio.text.equals("بطاقة الائتمان")) {
+                    paymentMethod = "payfort_fort_cc"
+
+                }
+            })
     }
 
     @Subscribe(sticky = false, threadMode = ThreadMode.BACKGROUND)
     fun onMessageEvent(messsg: MessageEvent) {/* Do something */
-        if(messsg.Message.equals("order")){
+        if (messsg.Message.equals("order")) {
             createOrder()
         }
 

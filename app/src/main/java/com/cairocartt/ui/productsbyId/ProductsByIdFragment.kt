@@ -28,6 +28,7 @@ import com.cairocartt.adapter.ProductFeatureAdapter
 import com.cairocartt.adapter.ProductsGridByIdAdapter
 import com.cairocartt.base.BaseFragment
 import com.cairocartt.data.remote.model.CategoriesResponse
+import com.cairocartt.data.remote.model.FilterResponse
 import com.cairocartt.data.remote.model.MessageEvent
 import com.cairocartt.data.remote.model.ProductsResponse
 import com.cairocartt.databinding.FragmentProductsByIdBinding
@@ -53,7 +54,7 @@ import org.greenrobot.eventbus.ThreadMode
 class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNavigator,
     SwipeRefreshLayout.OnRefreshListener {
     var linearView = true
-     var details: CategoriesResponse.DataCategory.ChildrenDataa?=null
+    var details: CategoriesResponse.DataCategory.ChildrenDataa? = null
     var bundle = Bundle()
     private var searchJob: Job? = null
     private val productReviwesViewModel: DetailsProductViewModel by viewModels()
@@ -61,10 +62,10 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
     private var data: SharedData? = null
     private var token: String? = String()
     private lateinit var detailsProduct: ProductsResponse.Data
-    private lateinit var productsGridAdapter : ProductsGridByIdAdapter
-    var postion=0
-    var product_Id:String?= String()
-    private lateinit var productsFeatureAdapter : ProductFeatureAdapter
+    private lateinit var productsGridAdapter: ProductsGridByIdAdapter
+    var postion = 0
+    var product_Id: String? = String()
+    private lateinit var productsFeatureAdapter: ProductFeatureAdapter
     val mViewModel2: FeaturedViewModel by navGraphViewModels(R.id.graph_home) {
         defaultViewModelProviderFactory
     }
@@ -88,6 +89,7 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
         subscriberemoveFavourit()
         subscribeChangesCatId()
         subscribeFiltertion()
+        subscribegetFilters()
         SearchKeyBoard()
 
 
@@ -100,9 +102,16 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
             }
         }
     }
-    private fun initRecycleFeature(){
-        mViewDataBinding.recyclerFeatured.isMotionEventSplittingEnabled=false
-        mViewDataBinding.recyclerFeatured.setLayoutManager(LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false))
+
+    private fun initRecycleFeature() {
+        mViewDataBinding.recyclerFeatured.isMotionEventSplittingEnabled = false
+        mViewDataBinding.recyclerFeatured.setLayoutManager(
+            LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
         mViewDataBinding.recyclerFeatured.adapter = productsFeatureAdapter
         mViewDataBinding.recyclerFeatured.adapter =
             productsFeatureAdapter.withLoadStateFooter(footer = LoadStateViewHolder.LoadingStateAdapter {
@@ -119,34 +128,36 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
         }
     }
 
-    private fun checkEmptyFeatureProduct(it : CombinedLoadStates){
-        if (it.source.refresh is LoadState.Error && productsFeatureAdapter.itemCount==0){
+    private fun checkEmptyFeatureProduct(it: CombinedLoadStates) {
+        if (it.source.refresh is LoadState.Error && productsFeatureAdapter.itemCount == 0) {
 
-        }else if( productsFeatureAdapter.itemCount>0) {
+        } else if (productsFeatureAdapter.itemCount > 0) {
             showFeatureProduct()
         }
     }
-    fun showFeatureProduct(){
-        mViewDataBinding.TFeature.visibility=View.VISIBLE
-        mViewDataBinding.SwipCategories.visibility=View.VISIBLE
+
+    fun showFeatureProduct() {
+        mViewDataBinding.TFeature.visibility = View.VISIBLE
+        mViewDataBinding.SwipCategories.visibility = View.VISIBLE
 
     }
 
-    fun initAdapterFeature(){
-        productsFeatureAdapter = ProductFeatureAdapter(requireContext(),productData = object :
+    fun initAdapterFeature() {
+        productsFeatureAdapter = ProductFeatureAdapter(requireContext(), productData = object :
             ProductFeatureAdapter.ProductItemListener {
             override fun itemClicked(productData: ProductsResponse.Data?) {
                 val newDialogFragment = DetailsProductFragment()
                 val bundle2 = Bundle()
                 bundle2.putParcelable("item", productData)
-                newDialogFragment.arguments=bundle2
+                newDialogFragment.arguments = bundle2
                 val transaction: FragmentTransaction =
                     requireActivity().supportFragmentManager.beginTransaction()
                 newDialogFragment.show(transaction, "New_Dialog_Fragment")
 
             }
+
             override fun itemFavourit(productData: ProductsResponse.Data?) {
-                detailsProduct=productData!!
+                detailsProduct = productData!!
                 token = data?.getValue(SharedData.ReturnValue.STRING, "token")
                 if (!token.isNullOrEmpty()) {
                     checkIsFavourit(detailsProduct.isInWishlist!!)
@@ -156,26 +167,28 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
             }
         })
     }
-   fun initAdapter(){
-         productsGridAdapter = ProductsGridByIdAdapter(requireContext(),productData = object :
+
+    fun initAdapter() {
+        productsGridAdapter = ProductsGridByIdAdapter(requireContext(), productData = object :
             ProductsGridByIdAdapter.ProductItemListener {
             override fun itemClicked(productData: ProductsResponse.Data?) {
                 val newDialogFragment = DetailsProductFragment()
                 val bundle2 = Bundle()
                 bundle2.putParcelable("item", productData)
-               newDialogFragment.arguments=bundle2
+                newDialogFragment.arguments = bundle2
                 val transaction: FragmentTransaction =
-            requireActivity().supportFragmentManager.beginTransaction()
-            newDialogFragment.show(transaction, "New_Dialog_Fragment")
+                    requireActivity().supportFragmentManager.beginTransaction()
+                newDialogFragment.show(transaction, "New_Dialog_Fragment")
 
             }
+
             override fun itemFavourit(productData: ProductsResponse.Data?) {
-                detailsProduct=productData!!
+                detailsProduct = productData!!
                 token = data?.getValue(SharedData.ReturnValue.STRING, "token")
                 if (!token.isNullOrEmpty()) {
                     checkIsFavourit(detailsProduct.isInWishlist!!)
                 } else {
-                  startActivity(Intent(requireContext(),LoginActivity::class.java))
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
                 }
             }
         })
@@ -200,33 +213,32 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
         }
 
 
-
     }
 
     private fun getData() {
         bundle = this.requireArguments()
-        if(bundle.getString("id").isNullOrEmpty()){
+        if (bundle.getString("id").isNullOrEmpty()) {
             details = bundle.getParcelable("cat")
-            mViewDataBinding.TTitle.text=details?.name
-            product_Id=details?.id.toString()
-        }else {
-            product_Id=bundle.getString("id")
+            mViewDataBinding.TTitle.text = details?.name
+            product_Id = details?.id.toString()
+        } else {
+            product_Id = bundle.getString("id")
             mViewDataBinding.TTitle.setText(resources.getString(R.string.product))
         }
 
         mViewModel2.Lang.value = ChangeLanguage.getLanguage(requireContext())
-        mViewModel2.userId.value= data?.getValue(SharedData.ReturnValue.STRING, "id")
-        productsGridAdapter.token=data?.getValue(SharedData.ReturnValue.STRING, "token")
-        mViewModel2.category_Id.value=product_Id.toString()
+        mViewModel2.userId.value = data?.getValue(SharedData.ReturnValue.STRING, "id")
+        productsGridAdapter.token = data?.getValue(SharedData.ReturnValue.STRING, "token")
+        mViewModel2.category_Id.value = product_Id.toString()
         mViewModel.Lang.value = ChangeLanguage.getLanguage(requireContext())
-        mViewModel.userId.value= data?.getValue(SharedData.ReturnValue.STRING, "id")
-        productsFeatureAdapter.token=data?.getValue(SharedData.ReturnValue.STRING, "token")
-        mViewModel.category_Id.value=product_Id.toString()
+        mViewModel.userId.value = data?.getValue(SharedData.ReturnValue.STRING, "id")
+        productsFeatureAdapter.token = data?.getValue(SharedData.ReturnValue.STRING, "token")
+        mViewModel.category_Id.value = product_Id.toString()
 
     }
 
     private fun initGridUI() {
-        mViewDataBinding.recyclerProductsGrid.isMotionEventSplittingEnabled=false
+        mViewDataBinding.recyclerProductsGrid.isMotionEventSplittingEnabled = false
         mViewDataBinding.recyclerProductsGrid.setLayoutManager(LinearLayoutManager(requireContext()))
         mViewDataBinding.recyclerProductsGrid.adapter = productsGridAdapter
         mViewDataBinding.recyclerProductsGrid.adapter =
@@ -249,8 +261,8 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
 
     }
 
-    private fun checkEmpryProduct(it : CombinedLoadStates){
-        if (it.source.refresh is LoadState.Error && productsGridAdapter.itemCount==0){
+    private fun checkEmpryProduct(it: CombinedLoadStates) {
+        if (it.source.refresh is LoadState.Error && productsGridAdapter.itemCount == 0) {
             showEmptyPage()
         }
     }
@@ -265,11 +277,13 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
         mViewDataBinding.shimmerLayout.stopShimmerAnimation()
         mViewDataBinding.shimmerLayout.isVisible = false
     }
-    fun showEmptyPage(){
-        mViewDataBinding.RelaEmpty.visibility=View.VISIBLE
+
+    fun showEmptyPage() {
+        mViewDataBinding.RelaEmpty.visibility = View.VISIBLE
     }
-    fun hideEmptyPage(){
-        mViewDataBinding.RelaEmpty.visibility=View.INVISIBLE
+
+    fun hideEmptyPage() {
+        mViewDataBinding.RelaEmpty.visibility = View.INVISIBLE
     }
 
 
@@ -280,7 +294,7 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
                     requireContext()
                 )
             )
-            postion=0
+            postion = 0
             productsGridAdapter.type = postion
         } else {
             mViewDataBinding.recyclerProductsGrid.setLayoutManager(
@@ -288,7 +302,7 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
                     requireContext(), 2
                 )
             )
-            postion=1
+            postion = 1
             productsGridAdapter.type = postion
         }
     }
@@ -307,14 +321,11 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
     }
 
     override fun onClickFilter() {
-        val newDialogFragment = FiltertionFragment()
-        val transaction: FragmentTransaction =
-            requireActivity().supportFragmentManager.beginTransaction()
-        newDialogFragment.show(transaction, "New_Dialog_Fragment")
+        mViewModel.getFilters()
     }
 
     override fun openHome() {
-        val intent=Intent(requireContext(), BottomNavigateFragment::class.java)
+        val intent = Intent(requireContext(), BottomNavigateFragment::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
@@ -389,14 +400,42 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
         })
     }
 
-    private fun subscribeChangesCatId() {
-        mViewModel.checkChanges.observe(viewLifecycleOwner, Observer {
-           if(it){
-               productsGridAdapter.refresh()
-           }
+    private fun subscribegetFilters() {
+        mViewModel.filtersResponse.observe(viewLifecycleOwner, Observer {
+            when (it.staus) {
+                Status.SUCCESS -> {
+                    dismissLoading()
+                    setFilterData(it.data)
+                }
+                Status.LOADING -> {
+                    showLoading()
+
+                }
+
+                Status.ERROR -> {
+                    dismissLoading()
+                }
+            }
         })
     }
 
+    private fun setFilterData(data: FilterResponse?) {
+        var bundle = Bundle()
+        bundle.putParcelable("data", data)
+        val newDialogFragment = FiltertionFragment()
+        newDialogFragment.arguments = bundle
+        val transaction: FragmentTransaction =
+            requireActivity().supportFragmentManager.beginTransaction()
+        newDialogFragment.show(transaction, "New_Dialog_Fragment")
+    }
+
+    private fun subscribeChangesCatId() {
+        mViewModel.checkChanges.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                productsGridAdapter.refresh()
+            }
+        })
+    }
 
 
     private fun subscriberemoveFavourit() {
@@ -424,9 +463,19 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
 
     fun checkIsFavourit(postion: Boolean) {
         if (postion) {
-            token?.let { it1 -> productReviwesViewModel.removeFavourit(detailsProduct.id.toString(), it1) }
+            token?.let { it1 ->
+                productReviwesViewModel.removeFavourit(
+                    detailsProduct.id.toString(),
+                    it1
+                )
+            }
         } else {
-            token?.let { it1 -> productReviwesViewModel.addFavourit(detailsProduct.id.toString(), it1) }
+            token?.let { it1 ->
+                productReviwesViewModel.addFavourit(
+                    detailsProduct.id.toString(),
+                    it1
+                )
+            }
         }
 
     }
@@ -434,10 +483,10 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
 
     @Subscribe(sticky = false, threadMode = ThreadMode.BACKGROUND)
     fun onMessageEvent(messsg: MessageEvent) {/* Do something */
-        if(messsg.Message.equals("login")){
-            productsGridAdapter.token=data?.getValue(SharedData.ReturnValue.STRING, "token")
+        if (messsg.Message.equals("login")) {
+            productsGridAdapter.token = data?.getValue(SharedData.ReturnValue.STRING, "token")
         }
-        if(messsg.Message.equals("network")){
+        if (messsg.Message.equals("network")) {
             refreshData()
         }
     };
@@ -455,15 +504,16 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
         checkInternet()
     }
 
-    fun checkInternet(){
-        if(!requireContext().isConnected){
+    fun checkInternet() {
+        if (!requireContext().isConnected) {
             startActivity(Intent(requireContext(), NoInternertActivity::class.java))
         }
     }
-    fun refreshData(){
-        if(requireContext().isConnected){
+
+    fun refreshData() {
+        if (requireContext().isConnected) {
             productsGridAdapter.refresh()
-        }else {
+        } else {
             startActivity(Intent(requireContext(), NoInternertActivity::class.java))
         }
     }
@@ -483,6 +533,7 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
             }
         })
     }
+
     private fun SearchKeyBoard() {
         mViewDataBinding.ESearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -491,7 +542,7 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
                     bundle2.putString("cat_Id", product_Id)
                     bundle2.putString("search", mViewDataBinding.ESearch.text.toString())
                     Navigation.findNavController(mViewDataBinding.root)
-                        .navigate(R.id.action_productsById_to_searchResultProduct, bundle2);                }
+                        .navigate(R.id.action_productsById_to_searchResultProduct, bundle2); }
                 return@OnEditorActionListener true
             }
             false

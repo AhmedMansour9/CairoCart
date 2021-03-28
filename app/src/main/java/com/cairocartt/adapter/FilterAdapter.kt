@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,8 @@ import com.cairocartt.R
 import com.cairocartt.data.remote.model.FilterResponse
 
 
-class FilterAdapter(val data: List<FilterResponse.Data>,val context: Context): BaseExpandableListAdapter() {
+class FilterAdapter(val context: Context, val data: List<FilterResponse.Data>) :
+    BaseExpandableListAdapter() {
 
     override fun getGroupCount(): Int {
         return data.size
@@ -55,22 +57,32 @@ class FilterAdapter(val data: List<FilterResponse.Data>,val context: Context): B
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = layoutInflater.inflate(R.layout.item_headerfilter, null)
         }
-//        val img_arrow_up: ImageView = convertView.findViewById(R.id.img_arrow_up)
-//        if (isExpanded) {
-//            img_arrow_up.setImageResource(R.drawable.ic_arrow_left)
-//        } else {
-//            img_arrow_up.setImageResource(R.drawable.ic_arrow_down)
-//        }
+        val img_arrow_up: ImageView? = convertView?.findViewById(R.id.bt_toggle_brand)
+        val T_Title: TextView? = convertView?.findViewById(R.id.T_Title)
+        T_Title?.text = title
+//       img_arrow_up?.setOnClickListener(){
+//
+//
+//       }
+        if(isExpanded){
+            img_arrow_up?.animate()?.setDuration(200)?.rotation(180f)
+        }else {
+            img_arrow_up?.animate()?.setDuration(200)?.rotation(0f)
+        }
 
 
-//----------------------------------------------------------- custom font-----------------------------------------------------
-
-//        val txt_reception: TextView = convertView.findViewById(R.id.txt_reception)
-//        txt_bedroom.setText(header_titles.get(groupPosition).Get_Fld6().toString() + " غرفه")
-//        txt_wc.setText(header_titles.get(groupPosition).Get_Fld7().toString() + " حمام")
-//        txt_kitchen.setText(header_titles.get(groupPosition).Get_Fld9().toString() + " مطبخ")
-//        txt_reception.setText(header_titles.get(groupPosition).Get_Fld8().toString() + " ريسيبشن")
         return convertView
+    }
+
+
+    fun toggleArrow(view: View): Boolean {
+        return if (view.rotation == 0f) {
+            view.animate().setDuration(200).rotation(180f)
+            true
+        } else {
+            view.animate().setDuration(200).rotation(0f)
+            false
+        }
     }
 
     override fun getChildView(
@@ -84,15 +96,15 @@ class FilterAdapter(val data: List<FilterResponse.Data>,val context: Context): B
         if (convertView == null) {
             val layoutInflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = layoutInflater.inflate(R.layout.item_headerfilter, null)
+            convertView = layoutInflater.inflate(R.layout.exp_all_child, null)
         }
         val recycle: RecyclerView
-//        val adapter: recycle_all_exp_model_build
-//        recycle = convertView.findViewById(R.id.recycle)
-//        adapter = recycle_all_exp_model_build(ctx, header_titles.get(groupPosition).Get_Fld3())
-//        recycle.adapter = adapter
-//        adapter.notifyDataSetChanged()
-//        recycle.scheduleLayoutAnimation()
+        val adapter: ChildFilterAdapter
+        recycle = convertView!!.findViewById(R.id.recycle)
+        adapter = ChildFilterAdapter(context, data.get(groupPosition).values,data.get(groupPosition).field)
+        recycle.adapter = adapter
+        adapter.notifyDataSetChanged()
+        recycle.scheduleLayoutAnimation()
         return convertView
     }
 

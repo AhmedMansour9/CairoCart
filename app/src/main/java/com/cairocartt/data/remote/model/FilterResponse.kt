@@ -18,7 +18,7 @@ data class FilterResponse(
     @Parcelize
     data class Data(
         @SerializedName("field")
-        var `field`: String?,
+        var `field`: String,
         @SerializedName("label")
         var label: String?,
         @SerializedName("values")

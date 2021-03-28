@@ -46,7 +46,7 @@ data class ListCartResponse(
         @SerializedName("items")
         var items: List<Item>?,
         @SerializedName("items_count")
-        var itemsCount: Int?,
+        var itemsCount: Int,
         @SerializedName("items_qty")
         var itemsQty: Int?,
         @SerializedName("orig_order_id")
@@ -210,7 +210,9 @@ data class ListCartResponse(
             @SerializedName("name")
             var name: String,
             @SerializedName("price")
-            var price: Int,
+            var
+
+            price: Int,
             @SerializedName("product_type")
             var productType: String?,
             @SerializedName("qty")

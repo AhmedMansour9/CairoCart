@@ -192,7 +192,7 @@ class BottomNavigateFragment : BaseActivity<BottomFragmentBinding>() {
 
     private fun setCounterCart(list: ListCartResponse) {
         if(list.data!=null) {
-            if (list.data!!.items!!.size > 0) {
+            if (list.data!!.itemsCount > 0) {
                 bottomNavigationView.getOrCreateBadge(R.id.cartFragment).setVisible(true)
                 bottomNavigationView.getOrCreateBadge(R.id.cartFragment).number =
                     list.data!!.itemsCount!!

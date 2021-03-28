@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="com.cairocartt.data.remote.model.CategoriesResponse.DataCategory.ChildrenDataa" />
+            type="com.cairocartt.data.remote.model.FilterResponse.Data.Value" />
 
     </data>
     <RelativeLayout
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
-            android:text= "@{model.name}"
+            android:text= "@{model.label}"
             android:textColor="@color/black"
             android:id="@+id/T_Name" />
 

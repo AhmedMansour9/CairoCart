@@ -28,7 +28,7 @@ class CatgoriesFliterAdapter(var categoryData: CategoryItemListener) : RecyclerV
 
     override fun onBindViewHolder(mDeveloperViewHolder: DeveloperViewHolder, i: Int) {
         val currentStudent = mListModel?.get(i)
-        mDeveloperViewHolder.mListMo.model = currentStudent
+//        mDeveloperViewHolder.mListMo.model = currentStudent
         mDeveloperViewHolder.onBind(i)
 
 

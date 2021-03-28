@@ -60,6 +60,9 @@ abstract class BaseDialogFragment<T : ViewDataBinding>() : BottomSheetDialogFrag
         )
         dialog.setContentView(mViewDataBinding.root)
 
+        val bottomSheetDialog = dialog
+        val bottomSheetBehavior = bottomSheetDialog.behavior
+        bottomSheetBehavior.isDraggable = false
 
         return dialog
     }

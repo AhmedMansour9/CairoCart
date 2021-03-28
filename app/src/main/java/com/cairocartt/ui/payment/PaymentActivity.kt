@@ -5,17 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.navGraphViewModels
 import com.cairocartt.R
 import com.cairocartt.base.BaseActivity
-import com.cairocartt.data.remote.model.ErrorModel
-import com.cairocartt.data.remote.model.MessageEvent
-import com.cairocartt.data.remote.model.ResponsePay
-import com.cairocartt.data.remote.model.WebCallback
+import com.cairocartt.data.remote.model.*
 import com.cairocartt.databinding.ActivityPaymentBinding
+import com.cairocartt.ui.createorder.CreateOrderViewModel
+import com.cairocartt.ui.ordersuccess.OrderSuccessActivity
+import com.cairocartt.utils.Status
 import com.payfort.fort.android.sdk.base.FortSdk
 import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager
 import com.payfort.sdk.android.dependancies.base.FortInterfaces
 import com.payfort.sdk.android.dependancies.models.FortRequest
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_payment.*
 import org.greenrobot.eventbus.EventBus
 import webconnect.com.webconnect.WebConnect
@@ -23,6 +27,7 @@ import webconnect.com.webconnect.listener.OnWebCallback
 import java.security.MessageDigest
 
 
+@AndroidEntryPoint
 class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
 
     override var idLayoutRes: Int = R.layout.activity_payment
@@ -31,12 +36,16 @@ class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
     lateinit var deviceId: String
     lateinit var price: String
     lateinit var email: String
+    lateinit var order_id: String
+    val mViewModel: CreateOrderViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         price=intent.getStringExtra("price")!!
         mViewDataBinding.price.text=price+" "+resources.getString(R.string.currency)
         email=intent.getStringExtra("email")!!
+        order_id=intent.getStringExtra("order_id")!!
+        subscribeConfirmPayment()
         /**
          * get device id using there SDK.
          * */
@@ -56,6 +65,32 @@ class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
              * */
             getToknSdk()
         }
+
+    }
+
+    private fun subscribeConfirmPayment() {
+        mViewModel.confirmPaymentResponse.observe(this, Observer {
+            when (it.staus) {
+                Status.SUCCESS -> {
+                    dismissLoading()
+                    successOrder(it.data)
+                }
+                Status.LOADING -> {
+                    showLoading()
+                }
+                Status.ERROR -> {
+                    dismissLoading()
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+    private fun successOrder(data: ConfirmPaymentResponse?) {
+        var intent = Intent(this, OrderSuccessActivity::class.java)
+        intent.putExtra("id",order_id)
+        startActivity(intent)
+
 
     }
 
@@ -89,6 +124,7 @@ class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
          * you should put  SHA response phrase ' in this example => Hello' at the end  e.g  Hellokey1=value1key2=value2Hellow
          *  check Docs for more details
          * */
+
         /**
          * you should get 'access_code' from your payfort account
          * */
@@ -182,7 +218,7 @@ class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
          * here we let user to entered as our test requirement.
          * */
 //        val x = editOne.text.toString()
-        hash.put("merchant_reference", "MSNo-" + System.currentTimeMillis().toString())
+        hash.put("merchant_reference",order_id)
         /**
          * you can also add any option key-value pairs
          * */
@@ -209,12 +245,27 @@ class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
             .registerCallback(this, model,
                 FortSdk.ENVIRONMENT.TEST, 5,
                 fortCallback, true, object : FortInterfaces.OnTnxProcessed {
-                    override fun onSuccess(p0: MutableMap<String, Any>?, p1: MutableMap<String, Any>?) {
+                    override fun onSuccess(p0: MutableMap<String, Any>?, hashMap: MutableMap<String, Any>?) {
                         Log.d(TAG, "onSuccess")
-//                        Log.d(TAG, p0.toString())
-//                        Log.d(TAG, p1.toString())
-                        EventBus.getDefault().postSticky(MessageEvent("order"))
-                        finish()
+//                        Log.d(TAG, "onSuccess"+ p1.toString())
+                        Toast.makeText(this@PaymentActivity, ""+hashMap?.get("authorization_code").toString(), Toast.LENGTH_SHORT).show()
+                       var confirm =RequestConfirmPayment()
+                        var request=RequestConfirmPayment.PaymentCallback()
+                        request.authorizationCode=hashMap?.get("authorization_code") as String
+                        request.cardNumber=hashMap?.get("card_number") as String
+                        request.command=hashMap?.get("command") as String
+                        request.customerIp=hashMap?.get("customer_ip") as String
+                        request.expiryDate=hashMap?.get("expiry_date") as String
+                        request.fortId=hashMap?.get("fort_id") as String
+                        request.eci=hashMap?.get("eci") as String
+                        request.language=hashMap?.get("language") as String
+                        request.merchantReference=hashMap?.get("merchant_reference") as String
+                        request.paymentOption=hashMap?.get("payment_option") as String
+                        request.responseCode=hashMap?.get("response_code") as String
+                        request.responseMessage=hashMap?.get("response_message") as String
+                        request.sdkToken=hashMap?.get("sdk_token") as String
+                        confirm.paymentCallback=request
+                        mViewModel.confirmPayment(confirm)
 
                     }
 
@@ -223,12 +274,16 @@ class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
                         Log.d(TAG, p0.toString())
                         Log.d(TAG, p1.toString())
                         Toast.makeText(this@PaymentActivity, "Error: ${p1?.get("response_message")}", Toast.LENGTH_LONG).show()
+
+                        error(resources.getString(R.string.error), p1?.get("response_message").toString())
                     }
 
                     override fun onCancel(p0: MutableMap<String, Any>?, p1: MutableMap<String, Any>?) {
                         Log.d(TAG, "onCancel")
                         Log.d(TAG, p0.toString())
                         Log.d(TAG, p1.toString())
+                        error(resources.getString(R.string.error), p1?.get("response_message").toString())
+
                     }
 
                 })

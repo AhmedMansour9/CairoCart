@@ -38,6 +38,9 @@ class CreateOrderViewModel @ViewModelInject constructor(dataCenterManager: DataC
     val createOrderResponse: LiveData<Resource<CreateOrderResponse>>
         get() = _createOrderResponse
 
+    private val _confirmPaymentResponse = MutableLiveData<Resource<ConfirmPaymentResponse>>()
+    val confirmPaymentResponse: LiveData<Resource<ConfirmPaymentResponse>>
+        get() = _confirmPaymentResponse
 
     init {
         if (countriesResponse.value == null)
@@ -173,7 +176,7 @@ class CreateOrderViewModel @ViewModelInject constructor(dataCenterManager: DataC
                                     response.body()?.status?.message.toString(),
                                     null))
                         }
-                    } else _shippingAddressResponse.postValue(
+                    } else _createOrderResponse.postValue(
                         Resource.error(
                             response.errorBody().toString(), null
                         )
@@ -181,6 +184,37 @@ class CreateOrderViewModel @ViewModelInject constructor(dataCenterManager: DataC
                 }
                 override fun onFailure(call: Call<CreateOrderResponse>, t: Throwable) {
                     _createOrderResponse.postValue(Resource.error(t.message.toString(), null))
+                }
+            }
+        )
+    }
+
+
+    fun confirmPayment(request:RequestConfirmPayment) {
+        _confirmPaymentResponse.postValue(Resource.loading(null))
+        dataCenterManager.confirmPayment(request).enqueue(
+            object : Callback, retrofit2.Callback<ConfirmPaymentResponse> {
+                override fun onResponse(
+                    call: Call<ConfirmPaymentResponse>,
+                    response: Response<ConfirmPaymentResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        if (response.body()?.status?.code == 200) {
+                            _confirmPaymentResponse.postValue(Resource.success(response.body()))
+                        } else {
+                            _confirmPaymentResponse.postValue(
+                                Resource.error(
+                                    response.body()?.status?.message.toString(),
+                                    null))
+                        }
+                    } else _confirmPaymentResponse.postValue(
+                        Resource.error(
+                            response.errorBody().toString(), null
+                        )
+                    )
+                }
+                override fun onFailure(call: Call<ConfirmPaymentResponse>, t: Throwable) {
+                    _confirmPaymentResponse.postValue(Resource.error(t.message.toString(), null))
                 }
             }
         )

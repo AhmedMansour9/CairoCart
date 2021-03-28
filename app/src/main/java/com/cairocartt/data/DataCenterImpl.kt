@@ -138,4 +138,13 @@ class DataCenterImpl @Inject constructor(
         ,firebase:String?
     ): Call<ProductsResponse> = apiRepository.fetchDetailsProducts(language,token,userId,map,firebase)
 
+    override fun fetchFilterData(
+        language: String,
+
+        map: Map<String, String>
+    ): Call<FilterResponse> = apiRepository.fetchFilterData(language,map)
+
+    override fun confirmPayment(request: RequestConfirmPayment): Call<ConfirmPaymentResponse> =
+        apiRepository.confirmPayment(request)
+
 }

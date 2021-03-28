@@ -133,4 +133,10 @@ interface DataCenterManager {
         ,firebase:String?
     ): Call<ProductsResponse>
 
+    fun fetchFilterData(
+        language: String,
+        map: Map<String, String>
+    ): Call<FilterResponse>
+
+    fun confirmPayment(request: RequestConfirmPayment): Call<ConfirmPaymentResponse>
 }

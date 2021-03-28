@@ -47,6 +47,12 @@ interface ApiService {
         @QueryMap map: Map<String, String>,@Header("Access-Firebase")token_firebase:String?
     ): Response<ProductsResponse>
 
+    @GET("{language}" + "/rest/V1/restapi/products/filters")
+     fun fetchFilterData(
+        @Path(value = "language", encoded = true) language: String,
+        @QueryMap map: Map<String, String>
+    ): Call<FilterResponse>
+
     @GET("{language}" + "/rest/V1/restapi/products")
      fun fetchDetailsProducts(
         @Path(value = "language", encoded = true) language: String,
@@ -170,10 +176,14 @@ interface ApiService {
     fun createOrder(@Body request: RequestCreateOrder, @Header("Authorization")token:String?,
                     @QueryMap map: Map<String, String>,@Header("Access-Firebase")token_firebase:String?): Call<CreateOrderResponse>
 
+
     @GET( "{language}" +"/rest/V1/restapi/orders/me")
     fun getMyOrders(  @Path(
         value = "language",
         encoded = true
     ) language: String,@Header("Authorization")token:String,@Header("Access-Firebase")token_firebase:String?): Call<MyOrdersResponse>
+
+    @POST( "/rest/V1/restapi/order/payment/callback")
+    fun confirmPayment(@Body request: RequestConfirmPayment ): Call<ConfirmPaymentResponse>
 
 }
