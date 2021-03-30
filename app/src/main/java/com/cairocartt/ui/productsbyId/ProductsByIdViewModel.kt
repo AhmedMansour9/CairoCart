@@ -15,6 +15,7 @@ import com.cairocartt.data.remote.model.MyOrdersResponse
 import com.cairocartt.data.remote.model.ProductsResponse
 import com.cairocartt.ui.bottomnavigate.BottomNavigateFragment
 import com.cairocartt.utils.Resource
+import com.cairocartt.utils.SingleLiveEvent
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
@@ -26,7 +27,7 @@ import kotlin.collections.HashMap
 class ProductsByIdViewModel @ViewModelInject constructor(dataCenterManager: DataCenterManager) :
     BaseViewModel<ProductByIdNavigator>(dataCenterManager) {
 
-    var filter = MutableLiveData<MutableList<FilterResponse.Data.Value>>()
+    var filter = MutableLiveData<ArrayList<FilterResponse.Data.Value>>()
 
 
 
@@ -46,8 +47,8 @@ class ProductsByIdViewModel @ViewModelInject constructor(dataCenterManager: Data
 
     }
 
-    private val _filtersResponse = MutableLiveData<Resource<FilterResponse>>()
-    val filtersResponse: LiveData<Resource<FilterResponse>>
+    private val _filtersResponse = SingleLiveEvent<Resource<FilterResponse>>(null)
+    val filtersResponse: SingleLiveEvent<Resource<FilterResponse>>
         get() = _filtersResponse
 
     fun getFilters() {

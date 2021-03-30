@@ -43,29 +43,23 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
 
 
     private var data: SharedData? = null
-    private var cat_Id: String? = String()
+    private var category_id: String? = String()
     private var brand_Id: String? = String()
     lateinit var filter: FilterResponse
-    var list: MutableList<FilterResponse.Data.Value> = mutableListOf()
+    var list: ArrayList<FilterResponse.Data.Value> = arrayListOf()
     val mViewModel: ProductsByIdViewModel by navGraphViewModels(R.id.graph_home) {
         defaultViewModelProviderFactory
     }
-    //    private var catAdapter =
-//        CatgoriesFliterAdapter(object : CatgoriesFliterAdapter.CategoryItemListener {
-//            override fun itemClicked(productData: CategoriesResponse.DataCategory.ChildrenDataa) {
-//                cat_Id=productData.id.toString()
-//                mViewDataBinding.TCategory.text=productData.name
-//                checkedToggleCategory()
-//                checkedToggleBrand()
-//            }
-//
-//        })
-//
+
     private lateinit var catAdapter: FilterAdapter
 
-
+    val mViewModelFiltertion : FiltertionViewModel by navGraphViewModels(R.id.graph_home) {
+        defaultViewModelProviderFactory
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        mViewDataBinding.viewmodel=mViewModelFiltertion
+        mViewModelFiltertion.navigator=this
         getData()
         onchangeSeekBar()
     }
@@ -74,8 +68,8 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
         var bundle = Bundle()
         bundle = requireArguments()
         filter = bundle.getParcelable("data")!!
-        catAdapter =
-            FilterAdapter(requireContext(), filter.data, object : FilterAdapter.FilterItemListner {
+        category_id=bundle.getString("category_id")
+        catAdapter = FilterAdapter(requireContext(), filter.data, object : FilterAdapter.FilterItemListner {
                 override fun onclick(Field: String, filter: FilterResponse.Data.Value) {
                     filter.field=Field
                     addList(Field,filter)
@@ -84,16 +78,16 @@ class FiltertionFragment : BaseDialogFragment<FragmentFiltertionBinding>(), Filt
             })
         mViewDataBinding.recyclerCategroies.setAdapter(catAdapter)
 
-        mViewDataBinding.recyclerCategroies.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
-
-            Toast.makeText(
-                requireContext(),
-                "" + filter.data.get(groupPosition).values.get(childPosition).label,
-                Toast.LENGTH_SHORT
-            ).show()
-
-            return@setOnChildClickListener false
-        }
+//        mViewDataBinding.recyclerCategroies.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
+//
+//            Toast.makeText(
+//                requireContext(),
+//                "" + filter.data.get(groupPosition).values.get(childPosition).label,
+//                Toast.LENGTH_SHORT
+//            ).show()
+//
+//            return@setOnChildClickListener false
+//        }
 
 
     }

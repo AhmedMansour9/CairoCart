@@ -65,7 +65,7 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
     private lateinit var detailsProduct: ProductsResponse.Data
     private lateinit var productsGridAdapter: ProductsGridByIdAdapter
     var postion = 0
-    var product_Id: String? = String()
+    var category_Id: String? = String()
     private lateinit var productsFeatureAdapter: ProductFeatureAdapter
     val mViewModel2: FeaturedViewModel by navGraphViewModels(R.id.graph_home) {
         defaultViewModelProviderFactory
@@ -223,20 +223,20 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
         if (bundle.getString("id").isNullOrEmpty()) {
             details = bundle.getParcelable("cat")
             mViewDataBinding.TTitle.text = details?.name
-            product_Id = details?.id.toString()
+            category_Id = details?.id.toString()
         } else {
-            product_Id = bundle.getString("id")
+            category_Id = bundle.getString("id")
             mViewDataBinding.TTitle.setText(resources.getString(R.string.product))
         }
 
         mViewModel2.Lang.value = ChangeLanguage.getLanguage(requireContext())
         mViewModel2.userId.value = data?.getValue(SharedData.ReturnValue.STRING, "id")
         productsGridAdapter.token = data?.getValue(SharedData.ReturnValue.STRING, "token")
-        mViewModel2.category_Id.value = product_Id.toString()
+        mViewModel2.category_Id.value = category_Id.toString()
         mViewModel.Lang.value = ChangeLanguage.getLanguage(requireContext())
         mViewModel.userId.value = data?.getValue(SharedData.ReturnValue.STRING, "id")
         productsFeatureAdapter.token = data?.getValue(SharedData.ReturnValue.STRING, "token")
-        mViewModel.category_Id.value = product_Id.toString()
+        mViewModel.category_Id.value = category_Id.toString()
 
     }
 
@@ -425,10 +425,11 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
     private fun setFilterData(data: FilterResponse?) {
         var bundle = Bundle()
         bundle.putParcelable("data", data)
+        bundle.putString("category_id", category_Id)
+
         val newDialogFragment = FiltertionFragment()
         newDialogFragment.arguments = bundle
-        val transaction: FragmentTransaction =
-            requireActivity().supportFragmentManager.beginTransaction()
+        val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         newDialogFragment.show(transaction, "New_Dialog_Fragment")
     }
 
@@ -524,10 +525,15 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
 
     private fun subscribeFiltertion() {
         mViewModel.filter.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                mViewModelFilter.filter.value=it
+            if (!it.isNullOrEmpty()) {
+                var bundle=Bundle()
+                bundle.putParcelableArrayList("list",it)
+                bundle.putString("cat_Id", category_Id)
+                Log.e("TAG", "subscribeFiltertion: "+mViewModel.filter.value )
+
                 Navigation.findNavController(mViewDataBinding.root)
-                    .navigate(R.id.action_productsById_to_resultFiltertionFragment);
+                    .navigate(R.id.action_productsById_to_resultFiltertionFragment,bundle);
+                mViewModel.filter.value?.clear()
                 mViewModel.filter.value = null
             }
         })
@@ -538,7 +544,7 @@ class ProductsById : BaseFragment<FragmentProductsByIdBinding>(), ProductByIdNav
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 if (!mViewDataBinding.ESearch.text.toString().isNullOrEmpty()) {
                     val bundle2 = Bundle()
-                    bundle2.putString("cat_Id", product_Id)
+                    bundle2.putString("cat_Id", category_Id)
                     bundle2.putString("search", mViewDataBinding.ESearch.text.toString())
                     Navigation.findNavController(mViewDataBinding.root)
                         .navigate(R.id.action_productsById_to_searchResultProduct, bundle2); }

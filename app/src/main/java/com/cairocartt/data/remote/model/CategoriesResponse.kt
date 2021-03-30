@@ -17,17 +17,17 @@ data class CategoriesResponse(
     @SuppressLint("ParcelCreator")
     @Parcelize
     data class DataCategory(
-        @SerializedName("children_data")
+        @SerializedName("additional_data")
         var childrenData: List<ChildrenDataa?>?,
-        @SerializedName("id")
+        @SerializedName("menu_id")
         var id: Int?,
-        @SerializedName("image")
-        var image: String?,
+//        @SerializedName("image")
+//        var image: String?,
         @SerializedName("is_active")
         var isActive: Boolean?,
         @SerializedName("level")
         var level: Int?,
-        @SerializedName("name")
+        @SerializedName("title")
         var name: String?,
         @SerializedName("parent_id")
         var parentId: Int?,
@@ -39,7 +39,7 @@ data class CategoriesResponse(
         @SuppressLint("ParcelCreator")
         @Parcelize
         data class ChildrenDataa(
-            @SerializedName("children_data")
+            @SerializedName("additional_data")
             var childrenData: MutableList<ChildrenDataa>,
             @SerializedName("id")
             var id: Int?,
@@ -49,7 +49,7 @@ data class CategoriesResponse(
             var isActive: Boolean?,
             @SerializedName("level")
             var level: Int?,
-            @SerializedName("name")
+            @SerializedName("title")
             var name: String?,
             @SerializedName("parent_id")
             var parentId: Int?,

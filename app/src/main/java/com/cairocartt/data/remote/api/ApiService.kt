@@ -20,7 +20,7 @@ interface ApiService {
     @PUT("rest/V1/customers/password")
      fun forgetPassword(@Body map: Map<String, String>,@Header("Access-Firebase")token_firebase:String?): Call<ForgetPasswordResponse>
 
-    @GET("{language}" + "/rest/V1/mstore/categories")
+    @GET("{language}" + "/rest/V1/menus/main_menu/nodes")
      fun fetchCategories(
         @Path(
             value = "language",
@@ -41,6 +41,14 @@ interface ApiService {
 
     @GET("{language}" + "/rest/V1/restapi/products")
     suspend fun fetchProductsById(
+        @Path(value = "language", encoded = true) language: String,
+        @Header("Authorization")token:String,
+        @Header("Customer-Id")userId:String,
+        @QueryMap map: Map<String, String>,@Header("Access-Firebase")token_firebase:String?
+    ): Response<ProductsResponse>
+
+    @GET("{language}" + "/rest/V1/restapi/products/filters")
+    suspend fun fetchProductsFilter(
         @Path(value = "language", encoded = true) language: String,
         @Header("Authorization")token:String,
         @Header("Customer-Id")userId:String,

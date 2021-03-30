@@ -52,6 +52,14 @@ class ApiRepository @Inject constructor(private val apiService: ApiService) : Ap
     ): Response<ProductsResponse> =
         apiService.fetchProductsById(language, token, userId, map,firebase)
 
+    override suspend fun fetchProductsFilter(
+        language: String,
+        token: String,
+        userId: String,
+        map: Map<String, String>,
+        token_firebase: String?
+    ): Response<ProductsResponse> = apiService.fetchProductsFilter(language,token,userId,map,token_firebase)
+
     override  fun fetchFilterData(
         language: String,
         map: Map<String, String>

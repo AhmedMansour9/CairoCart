@@ -139,4 +139,12 @@ interface DataCenterManager {
     ): Call<FilterResponse>
 
     fun confirmPayment(request: RequestConfirmPayment): Call<ConfirmPaymentResponse>
+
+    suspend fun fetchProductsFilter(
+        language: String,
+        token: String,
+        userId: String,
+        map: Map<String, String>,
+        token_firebase: String?
+    ): Response<ProductsResponse>
 }

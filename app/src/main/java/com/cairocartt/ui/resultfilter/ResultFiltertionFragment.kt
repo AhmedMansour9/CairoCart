@@ -24,6 +24,7 @@ import com.cairocartt.adapter.LoadStateViewHolder
 import com.cairocartt.adapter.ProductsGridByIdAdapter
 import com.cairocartt.base.BaseFragment
 import com.cairocartt.data.remote.model.CategoriesResponse
+import com.cairocartt.data.remote.model.FilterResponse
 import com.cairocartt.data.remote.model.MessageEvent
 import com.cairocartt.data.remote.model.ProductsResponse
 import com.cairocartt.databinding.FragmentProductsByIdBinding
@@ -65,6 +66,7 @@ class ResultFiltertionFragment : BaseFragment<FragmentResultFiltertionBinding>()
     private var token: String? = String()
     private lateinit var detailsProduct: ProductsResponse.Data
     private lateinit var productsGridAdapter : ProductsGridByIdAdapter
+    var list: ArrayList<FilterResponse.Data.Value> = arrayListOf()
 
     val mViewModel: ResultFitertionViewModel by navGraphViewModels(R.id.graph_home) {
         defaultViewModelProviderFactory
@@ -128,8 +130,8 @@ class ResultFiltertionFragment : BaseFragment<FragmentResultFiltertionBinding>()
 
     private fun getData() {
         bundle = this.requireArguments()
-//        mViewModel.category_Id.value=bundle.getString("cat_Id")
-//        mViewModel.brand_Id.value=bundle.getString("brand_Id")
+        mViewModel.category_Id.value=bundle.getString("cat_Id")
+        mViewModel.filter.value=bundle.getParcelableArrayList("list")
 //        mViewModel.min_Price.value=bundle.getString("min_Price")
 //        mViewModel.max_Price.value=bundle.getString("max_Price")
         mViewModel.search_term.value=bundle.getString("search")

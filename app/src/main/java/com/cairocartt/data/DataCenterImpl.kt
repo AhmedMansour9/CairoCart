@@ -147,4 +147,13 @@ class DataCenterImpl @Inject constructor(
     override fun confirmPayment(request: RequestConfirmPayment): Call<ConfirmPaymentResponse> =
         apiRepository.confirmPayment(request)
 
+    override suspend fun fetchProductsFilter(
+        language: String,
+        token: String,
+        userId: String,
+        map: Map<String, String>,
+        token_firebase: String?
+    ): Response<ProductsResponse> = apiRepository.fetchProductsFilter(language,token,userId,map,token_firebase)
+
+
 }
