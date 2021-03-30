@@ -121,7 +121,6 @@ class SubCategoriesFragment : BaseFragment<FragmentSubCategoriesBinding>(), Swip
         bundle = this.requireArguments()
         details=bundle.getParcelable("cat")
         details?.childrenData?.let { catAdapter.setList(it) }
-
         mViewModel2.Lang.value = ChangeLanguage.getLanguage(requireContext())
         mViewModel2.userId.value= data?.getValue(SharedData.ReturnValue.STRING, "id")
         productsGridAdapter.token=data?.getValue(SharedData.ReturnValue.STRING, "token")

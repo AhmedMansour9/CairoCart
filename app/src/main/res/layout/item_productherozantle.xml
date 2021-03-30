@@ -30,6 +30,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_3sdp"
+                android:visibility="gone"
                 android:id="@+id/PannerCard"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardElevation="1dp">
@@ -38,36 +39,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/Img_Product"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:imageUrl="@{model.imageUrl}"
-                        />
 
 
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
+            <ImageView
+                android:id="@+id/Img_Product"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                app:imageUrl="@{model.imageUrl}"
+                />
 
 
 
             <TextView
                 android:id="@+id/Title"
-                android:layout_width="@dimen/_110sdp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_below="@+id/PannerCard"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_below="@+id/Img_Product"
+                android:gravity="start"
                 android:fontFamily="@raw/cairo"
                 android:text= "@{model.name}"
                 android:textSize="@dimen/_10sdp"
                 android:maxLines="2"
                 android:textColor="#676767"
                 android:includeFontPadding="false"
-                android:layout_centerHorizontal="true"
                 />
 
 
@@ -75,9 +78,9 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/Title"
                 android:id="@+id/Rela"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/T_SalePrice"
@@ -95,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:layout_toEndOf="@+id/T_SalePrice"
 
                     android:ellipsize="end"
@@ -108,28 +111,30 @@
 
             </RelativeLayout>
 
-            <ImageView
+            <Button
                 android:id="@+id/Btn_AddCart"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:layout_width="@dimen/_25sdp"
+                android:layout_width="@dimen/_85sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_below="@+id/Rela"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/ic_roundedcart"
-                android:layout_alignStart="@+id/PannerCard"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:text="@string/addtocart"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@drawable/bc_btnraduiscart"
                 />
 
             <ImageView
                 android:id="@+id/Img_Favourit"
                 android:layout_width="@dimen/_25sdp"
+                android:layout_alignParentEnd="true"
                 android:layout_height="@dimen/_25sdp"
-                android:layout_below="@+id/Rela"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 app:checkFavourit="@{model.isInWishlist()}"
-                android:layout_alignEnd="@+id/PannerCard"
                 android:layout_marginStart="10dp"
                 />
 

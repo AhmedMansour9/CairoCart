@@ -36,8 +36,6 @@ class ResultFitertionViewModel @ViewModelInject constructor(dataCenterManager: D
         )
     }.flow
 
-
-
 }
 
 class ProductsPagination constructor(

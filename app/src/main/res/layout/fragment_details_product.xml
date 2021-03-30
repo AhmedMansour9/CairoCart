@@ -719,7 +719,7 @@
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/PannerCard"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_150sdp"
+                                android:layout_height="@dimen/_130sdp"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_8sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
@@ -735,6 +735,7 @@
                                         android:id="@+id/img_cash"
                                         android:layout_width="@dimen/_25sdp"
                                         android:layout_height="@dimen/_20sdp"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipFirst()}"
                                         android:layout_marginStart="@dimen/_20sdp"
                                         android:layout_marginTop="@dimen/_15sdp"
                                         android:src="@drawable/img_cash" />
@@ -742,12 +743,15 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_alignTop="@+id/img_cash"
+                                        android:layout_alignBottom="@+id/img_cash"
                                         android:layout_marginStart="@dimen/_10sdp"
-                                        android:layout_marginTop="@dimen/_18sdp"
                                         android:layout_toEndOf="@+id/img_cash"
-                                        android:textSize="@dimen/_10sdp"
+                                        android:gravity="center"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipFirst()}"
                                         android:text="@string/ship_first"
-                                        android:textColor="@color/black" />
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_10sdp" />
 
                                     <ImageView
                                         android:id="@+id/img_second"
@@ -756,18 +760,94 @@
                                         android:layout_below="@+id/img_cash"
                                         android:layout_marginStart="@dimen/_20sdp"
                                         android:layout_marginTop="@dimen/_5sdp"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipSecond()}"
                                         android:src="@drawable/img_secondship" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/img_cash"
+                                        android:layout_alignTop="@+id/img_second"
+                                        android:layout_alignBottom="@+id/img_second"
                                         android:layout_marginStart="@dimen/_10sdp"
-                                        android:layout_marginTop="@dimen/_7sdp"
-                                        android:textSize="@dimen/_10sdp"
                                         android:layout_toEndOf="@+id/img_cash"
+                                        android:gravity="center"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipSecond()}"
                                         android:text="@string/ship_second"
-                                        android:textColor="@color/black" />
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_10sdp" />
+
+                                    <ImageView
+                                        android:id="@+id/img_third"
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_below="@+id/img_second"
+                                        android:layout_marginStart="@dimen/_20sdp"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipThird()}"
+                                        android:src="@drawable/img_visa" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/img_second"
+                                        android:layout_alignTop="@+id/img_third"
+                                        android:layout_alignBottom="@+id/img_third"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipFourth()}"
+                                        android:layout_toEndOf="@+id/img_cash"
+                                        android:gravity="center"
+                                        android:text="@string/ship_third"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_10sdp" />
+
+                                    <ImageView
+                                        android:id="@+id/img_fourth"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_15sdp"
+                                        android:layout_below="@+id/img_third"
+                                        android:layout_marginStart="@dimen/_20sdp"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipFourth()}"
+                                        android:src="@drawable/img_fourthship" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/img_third"
+                                        android:layout_alignTop="@+id/img_fourth"
+                                        android:layout_alignBottom="@+id/img_fourth"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:layout_toEndOf="@+id/img_cash"
+                                        android:gravity="center"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipFourth()}"
+                                        android:text="@string/ship_fourth"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_10sdp" />
+
+                                    <ImageView
+                                        android:id="@+id/img_fifth"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_15sdp"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipFifth()}"
+                                        android:layout_below="@+id/img_fourth"
+                                        android:layout_marginStart="@dimen/_20sdp"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:src="@drawable/img_shipfifth" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/img_fourth"
+                                        android:layout_alignTop="@+id/img_fifth"
+                                        android:layout_alignBottom="@+id/img_fifth"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:layout_toEndOf="@+id/img_cash"
+                                        android:onClick="@{()->viewmodel.navigator.onClickShipFifth()}"
+                                        android:gravity="center"
+                                        android:text="@string/ship_fifth"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_10sdp" />
 
                                 </RelativeLayout>
 

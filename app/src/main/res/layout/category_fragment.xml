@@ -43,6 +43,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/bc_search"
+                    app:drawableTint="@color/colorPrimary"
                     android:drawableStart="@drawable/ic_search"
                     android:drawablePadding="@dimen/_5sdp"
                     android:focusable="true"

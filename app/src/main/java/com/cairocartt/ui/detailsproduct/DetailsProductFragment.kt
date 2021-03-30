@@ -3,6 +3,7 @@ package com.cairocartt.ui.detailsproduct
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -23,6 +24,7 @@ import com.cairocartt.ui.nointernet.NoInternertActivity
 import com.cairocartt.ui.addreview.AddReviewFragment
 import com.cairocartt.ui.congratulition.CongratulitionCartActivity
 import com.cairocartt.ui.login.LoginActivity
+import com.cairocartt.ui.policydetails.PolicyActivitiy
 import com.cairocartt.ui.productsbyId.ProductsByIdViewModel
 import com.cairocartt.utils.SharedData
 import com.cairocartt.utils.Status
@@ -87,14 +89,11 @@ class DetailsProductFragment : BaseDialogFragment<FragmentDetailsProductBinding>
 
     private fun setupView() {
         searchJob?.cancel()
-
         searchJob = lifecycleScope.launch {
             productViewModel.listData.collect {
                 productsGridAdapter.submitData(it)
             }
         }
-
-
 
     }
     private fun initGridUI() {
@@ -486,8 +485,39 @@ class DetailsProductFragment : BaseDialogFragment<FragmentDetailsProductBinding>
         dismiss()
     }
 
+    override fun onClickShipFirst() {
+        var intent =Intent(requireContext(),PolicyActivitiy::class.java)
+        intent.putExtra("link","https://cairocart.com/en/hassle-free-policies")
+        startActivity(intent)
+
+    }
+
+    override fun onClickShipSecond() {
+        var intent =Intent(requireContext(),PolicyActivitiy::class.java)
+        intent.putExtra("link","https://cairocart.com/en/100-day-returning-policy")
+        startActivity(intent)
+    }
+
+    override fun onClickShipThird() {
+        var intent =Intent(requireContext(),PolicyActivitiy::class.java)
+        intent.putExtra("link","https://cairocart.com/en/hassle-free-policies")
+        startActivity(intent)
+    }
+
+    override fun onClickShipFourth() {
+        var intent =Intent(requireContext(),PolicyActivitiy::class.java)
+        intent.putExtra("link","https://cairocart.com/en/hassle-free-policies")
+        startActivity(intent)
+    }
+
+    override fun onClickShipFifth() {
+        val dialIntent = Intent(Intent.ACTION_DIAL)
+        dialIntent.data = Uri.parse("tel:" + "01099944331")
+        startActivity(dialIntent)
+    }
+
     override fun onClickPlus() {
-        checkMaxCart()
+
     }
 
     @SuppressLint("SetTextI18n")

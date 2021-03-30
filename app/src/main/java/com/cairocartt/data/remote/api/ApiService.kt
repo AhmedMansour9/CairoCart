@@ -20,7 +20,7 @@ interface ApiService {
     @PUT("rest/V1/customers/password")
      fun forgetPassword(@Body map: Map<String, String>,@Header("Access-Firebase")token_firebase:String?): Call<ForgetPasswordResponse>
 
-    @GET("{language}" + "/rest/V1/menus/main_menu/nodes")
+    @GET("{language}" + "/rest/V1/mstore/categories")
      fun fetchCategories(
         @Path(
             value = "language",

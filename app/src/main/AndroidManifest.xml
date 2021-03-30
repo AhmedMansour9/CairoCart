@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.payment.PaymentActivity"/>
+        <activity android:name=".ui.policydetails.PolicyActivitiy"></activity>
+        <activity android:name=".ui.payment.PaymentActivity" />
         <activity
             android:name=".ui.forgetpassword.ForgetPasswordActivity"
             android:theme="@style/MyDialogTheme" />

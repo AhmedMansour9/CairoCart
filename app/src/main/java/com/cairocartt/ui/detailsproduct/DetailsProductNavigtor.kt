@@ -22,4 +22,10 @@ interface DetailsProductNavigtor : BaseNavigator {
 
     fun onCLickFinish()
 
+    fun onClickShipFirst()
+    fun onClickShipSecond()
+    fun onClickShipThird()
+    fun onClickShipFourth()
+    fun onClickShipFifth()
+
 }
