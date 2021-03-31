@@ -20,6 +20,7 @@ class ResultFitertionViewModel @ViewModelInject constructor(dataCenterManager: D
     var Lang = MutableLiveData<String>()
     var userId = MutableLiveData<String>()
     var category_Id = MutableLiveData<String>()
+    var brand_Id = MutableLiveData<String>()
     var search_term = MutableLiveData<String>()
 
     var filter = MutableLiveData<ArrayList<FilterResponse.Data.Value>>()
@@ -29,6 +30,7 @@ class ResultFitertionViewModel @ViewModelInject constructor(dataCenterManager: D
         ProductsPagination(
             dataCenterManager,
             search_term.value.toString(),
+            brand_Id.value.toString(),
             category_Id.value.toString(),
             filter.value,
             userId.value.toString(),
@@ -41,6 +43,7 @@ class ResultFitertionViewModel @ViewModelInject constructor(dataCenterManager: D
 class ProductsPagination constructor(
     dataCenterManager: DataCenterManager,
     search_term: String?,
+    brand_id: String?,
     cat_id: String?,
     list: MutableList<FilterResponse.Data.Value>?,
     userId: String,
@@ -48,6 +51,7 @@ class ProductsPagination constructor(
 ) :
     PagingSource<Int, ProductsResponse.Data>() {
     var cat_id: String? = String()
+    var brand_id: String? = String()
     var search_term: String? = String()
 
     var list: MutableList<FilterResponse.Data.Value>?
@@ -57,6 +61,7 @@ class ProductsPagination constructor(
 
     init {
         this.search_term = search_term
+        this.brand_id = brand_id
         this.cat_id = cat_id
         this.lang = Lang
         this.list = list
@@ -75,6 +80,15 @@ class ProductsPagination constructor(
             if (!cat_id.isNullOrEmpty()) {
                 hashMap.put("searchCriteria[filterGroups][0][filters][0][field]", "category_id")
                 cat_id?.let {
+                    hashMap.put(
+                        "searchCriteria[filterGroups][0][filters][0][value]",
+                        it
+                    )
+                }
+            }
+            if (!brand_id.isNullOrEmpty()) {
+                hashMap.put("searchCriteria[filterGroups][0][filters][0][field]", "manufacturer")
+                brand_id?.let {
                     hashMap.put(
                         "searchCriteria[filterGroups][0][filters][0][value]",
                         it
@@ -115,7 +129,6 @@ class ProductsPagination constructor(
             val responseData = mutableListOf<ProductsResponse.Data>()
             val data = response.body()!!.data
             responseData.addAll(data)
-
             val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
             if (data.size > 0) {
                 return LoadResult.Page(

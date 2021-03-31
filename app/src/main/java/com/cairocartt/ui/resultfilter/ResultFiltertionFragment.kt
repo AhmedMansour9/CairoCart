@@ -132,7 +132,7 @@ class ResultFiltertionFragment : BaseFragment<FragmentResultFiltertionBinding>()
         bundle = this.requireArguments()
         mViewModel.category_Id.value=bundle.getString("cat_Id")
         mViewModel.filter.value=bundle.getParcelableArrayList("list")
-//        mViewModel.min_Price.value=bundle.getString("min_Price")
+        mViewModel.brand_Id.value=bundle.getString("brand_Id")
 //        mViewModel.max_Price.value=bundle.getString("max_Price")
         mViewModel.search_term.value=bundle.getString("search")
 

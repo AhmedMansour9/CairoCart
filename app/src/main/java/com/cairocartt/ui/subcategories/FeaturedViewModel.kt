@@ -23,8 +23,6 @@ class FeaturedViewModel @ViewModelInject constructor(dataCenterManager: DataCent
     var filter = MutableLiveData<FilterModel>()
 
 
-
-
     var checkChanges = MutableLiveData<Boolean>()
     var Lang = MutableLiveData<String>()
     var userId = MutableLiveData<String>()
@@ -41,8 +39,6 @@ class FeaturedViewModel @ViewModelInject constructor(dataCenterManager: DataCent
     }
 
 
-
-
     var listDataFeatured = Pager(PagingConfig(pageSize = 10)) {
         ProductsFeaturedPagination(
             dataCenterManager,
@@ -55,7 +51,8 @@ class FeaturedViewModel @ViewModelInject constructor(dataCenterManager: DataCent
 }
 
 
-class ProductsFeaturedPagination constructor(dataCenterManager: DataCenterManager, categoryId: String, userId: String, Lang: String
+class ProductsFeaturedPagination constructor(
+    dataCenterManager: DataCenterManager, categoryId: String, userId: String, Lang: String
 ) :
     PagingSource<Int, ProductsResponse.Data>() {
     var cat_id = categoryId
@@ -80,25 +77,27 @@ class ProductsFeaturedPagination constructor(dataCenterManager: DataCenterManage
             hashMap.put("searchCriteria[filterGroups][0][filters][0][field]", "category_id")
             hashMap.put("searchCriteria[currentPage]", currentLoadingPageKey.toString())
             hashMap.put("searchCriteria[pageSize]", "10")
-                hashMap.put("searchCriteria[filterGroups][0][filters][1][value]", "1")
-                hashMap.put("searchCriteria[filterGroups][0][filters][1][field]", "featured")
+            hashMap.put("searchCriteria[filterGroups][0][filters][1][value]", "1")
+            hashMap.put("searchCriteria[filterGroups][0][filters][1][field]", "featured")
 
 
             val response = dataCenterManager.getProductsById(
-                lang, "Bearer 5u1forfnoiuok9qtdaftqxtyd399bcsl", userId, hashMap ,
-                BaseActivity.token )
+                lang, "Bearer 5u1forfnoiuok9qtdaftqxtyd399bcsl", userId, hashMap,
+                BaseActivity.token
+            )
 
             val responseData = mutableListOf<ProductsResponse.Data>()
             val data = response.body()!!.data
             responseData.addAll(data)
 
             val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
-            if (data.size>0){
+            if (data.size > 0) {
                 return LoadResult.Page(
                     data = responseData,
                     prevKey = prevKey,
-                    nextKey = currentLoadingPageKey.plus(1))
-            }else
+                    nextKey = currentLoadingPageKey.plus(1)
+                )
+            } else
                 return LoadResult.Error(IllegalAccessException())
 
         } catch (e: Exception) {

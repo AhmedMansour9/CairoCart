@@ -97,7 +97,11 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>(), SwipeRefreshLayout.On
 //                    requireActivity().supportFragmentManager.beginTransaction()
 //                newDialogFragment.show(transaction, "New_Dialog_Fragment")
                 }
-            })
+
+            override fun onclickChild(product_Id: String) {
+                product_Id?.let { mViewModel.getDetailsProduct(it) }
+            }
+        })
 
         }
 
@@ -194,9 +198,7 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>(), SwipeRefreshLayout.On
     override fun onStart() {
         super.onStart()
         checkInternet()
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this)
-        }
+
         checkNotiocationType()
     }
 
@@ -207,15 +209,7 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>(), SwipeRefreshLayout.On
     }
 
 
-    @Subscribe(sticky = false, threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(messsg: MessageEvent) {/* Do something */
-        Log.d("IGNORE", "Logging view to curb warnings: $messsg")
-        if(messsg.Message.equals("product"))
-        {
-            messsg.product_Id?.let { mViewModel.getDetailsProduct(it) }
-        }
 
-    };
     private fun checkNotiocationType(){
         if(!BottomNavigateFragment.notificationType.isNullOrEmpty()){
           if(BottomNavigateFragment.notificationType.equals("brand")){

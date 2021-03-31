@@ -54,7 +54,7 @@ class HomeAdapter (var context:Context,var itemclick: CartItemListner) :
                        }
                    }
                })
-               adapter = currentList?.cards?.let { ChildHomeAdapter(it,type!!,context) }
+               adapter = currentList?.cards?.let { ChildHomeAdapter(it,type!!,context,itemclick) }
                setRecycledViewPool(viewPool)
            }
        }else if(type.equals("slider")) {
@@ -68,14 +68,14 @@ class HomeAdapter (var context:Context,var itemclick: CartItemListner) :
            val childLayoutManager = LinearLayoutManager(mDeveloperViewHolder.itemView.rvMenuChildSections.context, LinearLayoutManager.HORIZONTAL, false)
            mDeveloperViewHolder.itemView.rvMenuChildSections.apply {
                layoutManager = childLayoutManager
-               adapter = currentList?.cards?.let { ChildHomeAdapter(it,type!!,context) }
+               adapter = currentList?.cards?.let { ChildHomeAdapter(it,type!!,context,itemclick) }
                setRecycledViewPool(viewPool)
            }
        }else {
            val childLayoutManager = LinearLayoutManager(mDeveloperViewHolder.itemView.rvMenuChildSections.context, LinearLayoutManager.HORIZONTAL, false)
                mDeveloperViewHolder.itemView.rvMenuChildSections.apply {
                layoutManager = childLayoutManager
-               adapter = currentList?.cards?.let { ChildHomeAdapter(it,type!!,context) }
+               adapter = currentList?.cards?.let { ChildHomeAdapter(it,type!!,context,itemclick) }
                setRecycledViewPool(viewPool)
            }
        }
@@ -126,6 +126,7 @@ class HomeAdapter (var context:Context,var itemclick: CartItemListner) :
     interface CartItemListner {
 
         fun onclick(list: HomeResponse.Data)
+        fun onclickChild(product_Id: String)
 
     }
 

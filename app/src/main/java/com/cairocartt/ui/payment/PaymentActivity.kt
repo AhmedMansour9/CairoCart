@@ -248,7 +248,6 @@ class PaymentActivity : BaseActivity<ActivityPaymentBinding>(),OnWebCallback  {
                     override fun onSuccess(p0: MutableMap<String, Any>?, hashMap: MutableMap<String, Any>?) {
                         Log.d(TAG, "onSuccess")
 //                        Log.d(TAG, "onSuccess"+ p1.toString())
-                        Toast.makeText(this@PaymentActivity, ""+hashMap?.get("authorization_code").toString(), Toast.LENGTH_SHORT).show()
                        var confirm =RequestConfirmPayment()
                         var request=RequestConfirmPayment.PaymentCallback()
                         request.authorizationCode=hashMap?.get("authorization_code") as String

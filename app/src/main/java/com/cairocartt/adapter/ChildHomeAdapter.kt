@@ -17,7 +17,8 @@ import org.greenrobot.eventbus.EventBus
 class ChildHomeAdapter(
     var mListCart: MutableList<HomeResponse.Data.Card>,
     var status: String,
-    var context: Context
+    var context: Context,
+    var itemclick:HomeAdapter.CartItemListner
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     internal val VIEW_TYPE_ONE = 4
@@ -111,7 +112,7 @@ class ChildHomeAdapter(
         }
         fun checkRefrence(position: HomeResponse.Data.Card) {
             if (position.referenceType.contains("ProductFactory")) {
-                EventBus.getDefault().postSticky(MessageEvent("product",position.referenceId.toString()))
+                itemclick.onclickChild(position.referenceId.toString())
 
             } else if (position.referenceType.contains("BrandFactory")) {
                 var bundle = Bundle()
@@ -124,7 +125,6 @@ class ChildHomeAdapter(
                 bundle.putString("id", position.referenceId.toString())
                 mListResponse.root.findNavController()
                     .navigate(R.id.action_homeFragment_to_productsById, bundle)
-
             }
         }
     }
@@ -147,7 +147,7 @@ class ChildHomeAdapter(
 //
 //               mListResponse.root.findNavController().navigate(R.id.action_homeFragment_to_productsById,bundle)
 
-                EventBus.getDefault().postSticky(MessageEvent("product",position.referenceId.toString()))
+                itemclick.onclickChild(position.referenceId.toString())
 
             } else if (position.referenceType.contains("BrandFactory")) {
                 var bundle = Bundle()
@@ -171,13 +171,14 @@ class ChildHomeAdapter(
             mListResponse.model = position
             itemView.setOnClickListener(){
                 checkRefrence(position)
-            }        }
+            }
+        }
         fun checkRefrence(position: HomeResponse.Data.Card) {
             if (position.referenceType.contains("ProductFactory")) {
 //               var bundle=Bundle()
 //
 //               mListResponse.root.findNavController().navigate(R.id.action_homeFragment_to_productsById,bundle)
-                EventBus.getDefault().postSticky(MessageEvent("product",position.referenceId.toString()))
+                itemclick.onclickChild(position.referenceId.toString())
 
 
             } else if (position.referenceType.contains("BrandFactory")) {
@@ -210,7 +211,7 @@ class ChildHomeAdapter(
 //               var bundle=Bundle()
 //
 //               mListResponse.root.findNavController().navigate(R.id.action_homeFragment_to_productsById,bundle)
-                EventBus.getDefault().postSticky(MessageEvent("product",position.referenceId.toString()))
+                itemclick.onclickChild(position.referenceId.toString())
 
 
             } else if (position.referenceType.contains("BrandFactory")) {
