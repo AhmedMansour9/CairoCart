@@ -6,7 +6,7 @@
 
     <variable
             name="model"
-            type="com.cairocartt.data.remote.model.CategoriesResponse.DataCategory.ChildrenDataa" />
+            type="com.cairocartt.data.remote.model.CategoriesResponse.DataCategory" />
 
     </data>
 

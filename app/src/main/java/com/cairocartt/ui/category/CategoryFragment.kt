@@ -29,8 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class CategoryFragment : BaseFragment<CategoryFragmentBinding>(),SwipeRefreshLayout.OnRefreshListener,
-    CategoriesAdapter.ItemListener {
+class CategoryFragment : BaseFragment<CategoryFragmentBinding>(),SwipeRefreshLayout.OnRefreshListener{
 
     override var idLayoutRes: Int = R.layout.category_fragment
     private var data: SharedData? = null
@@ -39,8 +38,8 @@ class CategoryFragment : BaseFragment<CategoryFragmentBinding>(),SwipeRefreshLay
         defaultViewModelProviderFactory
     }
     private  var catAdapter=GridCategories_Adapter(object : GridCategories_Adapter.CategoryItemListener{
-        override fun itemClicked(productData: CategoriesResponse.DataCategory.ChildrenDataa) {
-            if(productData.childrenData.size>0){
+        override fun itemClicked(productData: CategoriesResponse.DataCategory) {
+            if(productData.childrenData!!.size>0){
                 val bundle = Bundle()
                 bundle.putParcelable("cat", productData)
                 Navigation.findNavController(mViewDataBinding.root)
@@ -106,7 +105,7 @@ class CategoryFragment : BaseFragment<CategoryFragmentBinding>(),SwipeRefreshLay
             when (it.staus) {
                 Status.SUCCESS -> {
                     hideShimmer ()
-                    addData(it.data?.data?.childrenData as MutableList<CategoriesResponse.DataCategory.ChildrenDataa>)
+                    addData(it.data?.data as MutableList<CategoriesResponse.DataCategory>)
                 }
                 Status.LOADING -> {
                    showShimmer()
@@ -133,39 +132,10 @@ class CategoryFragment : BaseFragment<CategoryFragmentBinding>(),SwipeRefreshLay
     }
 
     var tree: Node<CatModel>? = null
-    private fun addData(data: MutableList<CategoriesResponse.DataCategory.ChildrenDataa>) {
+    private fun addData(data: MutableList<CategoriesResponse.DataCategory>) {
         catAdapter.setList(data)
 
-//        mViewDataBinding.treeItemsRv.isVisible=true
-//
-//        tree = data?.toTree()
-//        tree?.let {
-//            it.value.isExpanded=false
-//            controller.setData(it)
-//        }
-    }
 
-
-    private fun onCatModelClicked(node: Node<CatModel>) {
-        Log.d(TAG, "onActivityCreated: ")
-        if (!node.value.notChild) {
-            Log.d(TAG, "onCatModelClicked: "+node.value.name +":"+node.value.isExpanded+":"+node.value.notChild)
-            node.value = node.value.copy(isExpanded = !node.value.isExpanded)
-            tree?.let {
-                controller.setData(it)
-            }
-
-
-        }else{
-            itemClicked(node.value)
-        }
-    }
-
-    override fun itemClicked(node: CatModel) {
-             val bundle = Bundle()
-            bundle.putParcelable("cat", node)
-            Navigation.findNavController(mViewDataBinding.root)
-                .navigate(R.id.action_T_Categories_to_productsById, bundle);
     }
 
 

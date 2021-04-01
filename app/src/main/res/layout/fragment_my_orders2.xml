@@ -131,6 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/Rela_Empty"
+                android:visibility="gone"
                 android:layout_marginTop="?actionBarSize">
 
                 <ImageView

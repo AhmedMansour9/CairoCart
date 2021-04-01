@@ -69,7 +69,7 @@ class SubCategoriesFragment : BaseFragment<FragmentSubCategoriesBinding>(), Swip
     }
     override var idLayoutRes: Int = R.layout.fragment_sub_categories
     private var data: SharedData? = null
-    var details: CategoriesResponse.DataCategory.ChildrenDataa?=null
+    var details: CategoriesResponse.DataCategory?=null
     private lateinit var detailsProduct: ProductsResponse.Data
 
 

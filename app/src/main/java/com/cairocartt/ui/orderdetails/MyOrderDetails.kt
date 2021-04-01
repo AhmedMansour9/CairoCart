@@ -92,27 +92,38 @@ class MyOrderDetails : BaseDialogFragment<FragmentMyOrderDetailsBinding>() {
     private fun setStatus(position: MyOrdersResponse.Data?) {
         if(position?.status.equals("processing")){
             mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.processing)
+            mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.processing)
         }
         else if(position?.status.equals("pending_payment")){
+            mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.pending_payment)
             mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.pending_payment)
 
         }
         else if(position?.status.equals("pending")){
             mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.pending)
+            mViewDataBinding.TStatus.text=": "+resources.getString(R.string.pending)
 
         }
         else if(position?.status.equals("holded")){
             mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.holded)
+            mViewDataBinding.TStatus.text=": "+resources.getString(R.string.holded)
 
         }
         else if(position?.status.equals("complete")){
             mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.completed)
+            mViewDataBinding.TStatus.text=": "+resources.getString(R.string.completed)
         }
         else if(position?.status.equals("canceled")){
             mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.canceled)
+            mViewDataBinding.TStatus.text=": "+resources.getString(R.string.canceled)
         }
         else if(position?.status.equals("closed")){
             mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.closed)
+            mViewDataBinding.TStatus.text=": "+resources.getString(R.string.closed)
+        }
+        else if(position?.status.equals("payfort_fort_new")){
+            mViewDataBinding.TOrderStatus.text=": "+resources.getString(R.string.payfort_payment)
+            mViewDataBinding.TStatus.text=": "+resources.getString(R.string.payfort_payment)
         }
     }
 

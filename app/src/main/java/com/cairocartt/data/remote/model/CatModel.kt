@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
  data class CatModel(
    val id: Int,
    val image: String?,
-   val isActive: Boolean,
+   val isActive: Int,
    val level: Int,
    val name: String,
    val productCount: Int,

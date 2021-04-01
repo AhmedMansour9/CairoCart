@@ -69,6 +69,7 @@
     <string name="ordernow">Order Now</string>
     <string name="ordersuccess"> Your Order added successfully</string>
     <string name="debit">Credit / Debit Card</string>
+    <string name="debithome">Credit Card on Delivery</string>
     <string name="perviousorder">PREVIOUS ORDERS</string>
     <string name="cash">Cash On Delivery</string>
     <string name="noorders">Not found any order</string>
@@ -331,6 +332,7 @@
     <string name="pending_payment">Pending Payment</string>
     <string name="holded">On Hold</string>
     <string name="closed">Closed</string>
+    <string name="payfort_payment">Payment Payfort</string>
     <string name="email_sentsucces">Check your Email to reset your password</string>
     <string name="wrong_email">Email is not valid</string>
     <string name="continuecartt">Continue</string>

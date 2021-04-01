@@ -88,6 +88,9 @@ class MyOrdersAdapter (var context:Context,var itemclick: CartItemListner) :
             else if(position?.status.equals("closed")){
                 itemView.T_Status.text=": "+context.resources.getString(R.string.closed)
             }
+            else if(position?.status.equals("payfort_fort_new")){
+                itemView.T_Status.text=": "+context.resources.getString(R.string.payfort_payment)
+            }
         }
 
 

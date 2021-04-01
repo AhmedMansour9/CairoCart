@@ -132,6 +132,10 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
             var intent = Intent(requireContext(), OrderSuccessActivity::class.java)
             intent.putExtra("id", it?.data)
             startActivity(intent)
+        }else  if (paymentMethod.equals("banktransfer")) {
+            var intent = Intent(requireContext(), OrderSuccessActivity::class.java)
+            intent.putExtra("id", it?.data)
+            startActivity(intent)
         } else if (paymentMethod.equals("payfort_fort_cc")) {
             var intent = Intent(requireContext(), PaymentActivity::class.java)
             intent.putExtra("price", bundle?.getString("TotalPrice"))
@@ -190,6 +194,10 @@ class CheckOutDetailsFragment : BaseDialogFragment<FragmentCheckOutDetailsBindin
 
                 } else if (radio.text.equals("Credit / Debit Card") || radio.text.equals("بطاقة الائتمان")) {
                     paymentMethod = "payfort_fort_cc"
+
+                }
+                else if (radio.text.equals("Credit Card on Delivery") || radio.text.equals("الدفع ببطاقة الائتمان عند التسليم")) {
+                    paymentMethod = "banktransfer"
 
                 }
             })

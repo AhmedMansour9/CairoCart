@@ -6,7 +6,7 @@ import com.cairocartt.data.remote.model.CatModel
 
 
 fun CategoriesResponse.DataCategory.toTree(): Node<CatModel>? {
-    val root: Node<CatModel> = Node(CatModel(-1, null, false, -1, "", -1, -1, false,notChild = false))
+    val root: Node<CatModel> = Node(CatModel(-1, null, 0, -1, "", -1, -1, false,notChild = false))
     root.children = toCategories(childrenData) ?: mutableListOf()
     return root
 }
@@ -22,13 +22,13 @@ fun CategoriesResponse.DataCategory.toTree(): Node<CatModel>? {
             val node: Node<CatModel> = Node(
                 CatModel(
                     id = id,
-                    image = children.image,
+                    image = null,
                     name = name,
-                    isActive = children.isActive ?: false,
+                    isActive = children.isActive ?: 0,
                     isExpanded = false,
                     notChild = children.childrenData.isNullOrEmpty(),
                     level = children.level ?: 0,
-                    productCount = children.productCount ?: 0,
+                    productCount =  0,
                     parentId = children.parentId ?: 0
 
                 )

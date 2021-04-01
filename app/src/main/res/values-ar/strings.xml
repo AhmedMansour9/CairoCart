@@ -69,6 +69,8 @@
     <string name="ordernow">تأكيد الطلب</string>
     <string name="ordersuccess"> تمت إضافة طلبك بنجاح</string>
     <string name="debit">بطاقة الائتمان</string>
+    <string name="debithome">الدفع ببطاقة الائتمان عند التسليم</string>
+
     <string name="perviousorder">االطلبات السابقة</string>
     <string name="cash">نقدي</string>
     <string name="noorders">لم يتم العثور على أي أمر</string>
@@ -333,6 +335,7 @@
     <string name="ship_third">قسط كل طلباتك لحد 60 شهر </string>
     <string name="ship_fourth">هنوفرلك احسن سعر انت شوفته</string>
     <string name="ship_fifth">للمساعدة, اتصل بنا 0109994431</string>
+    <string name="payfort_payment">الدفع باي فورت</string>
 
 
 </resources>

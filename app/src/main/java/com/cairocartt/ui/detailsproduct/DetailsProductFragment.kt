@@ -517,7 +517,8 @@ class DetailsProductFragment : BaseDialogFragment<FragmentDetailsProductBinding>
     }
 
     override fun onClickPlus() {
-
+            counter++
+            mViewDataBinding.TQuantity.text = counter.toString()
     }
 
     @SuppressLint("SetTextI18n")

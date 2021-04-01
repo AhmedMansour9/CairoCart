@@ -14,11 +14,11 @@ import com.cairocartt.databinding.ItemReviewsBinding
 class GridCategories_Adapter(var categoryData: CategoryItemListener) : RecyclerView.Adapter<GridCategories_Adapter.DeveloperViewHolder>() ,
     Filterable {
 
-    private var mListModel: MutableList<CategoriesResponse.DataCategory.ChildrenDataa>? = arrayListOf()
+    private var mListModel: MutableList<CategoriesResponse.DataCategory>? = arrayListOf()
 
-    var filtered: MutableList<CategoriesResponse.DataCategory.ChildrenDataa>? = ArrayList<CategoriesResponse.DataCategory.ChildrenDataa>()
+    var filtered: MutableList<CategoriesResponse.DataCategory>? = ArrayList<CategoriesResponse.DataCategory>()
 
-    var mArrayList: MutableList<CategoriesResponse.DataCategory.ChildrenDataa>? = null
+    var mArrayList: MutableList<CategoriesResponse.DataCategory>? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): DeveloperViewHolder {
         val mTradersResponse = DataBindingUtil.inflate<ItemCategoryBinding>(
@@ -47,7 +47,7 @@ class GridCategories_Adapter(var categoryData: CategoryItemListener) : RecyclerV
         }
     }
 
-    fun setList(mDeveloperModel: MutableList<CategoriesResponse.DataCategory.ChildrenDataa>) {
+    fun setList(mDeveloperModel: MutableList<CategoriesResponse.DataCategory>) {
         this.mListModel = mDeveloperModel
         this.mArrayList = mDeveloperModel
 
@@ -91,13 +91,13 @@ class GridCategories_Adapter(var categoryData: CategoryItemListener) : RecyclerV
             }
 
             override fun publishResults(charSequence: CharSequence, filterResul: FilterResults) {
-                mListModel = filterResul.values as MutableList<CategoriesResponse.DataCategory.ChildrenDataa>?
+                mListModel = filterResul.values as MutableList<CategoriesResponse.DataCategory>?
                 notifyDataSetChanged()
             }
         }
     }
     interface CategoryItemListener {
-        fun itemClicked(productData: CategoriesResponse.DataCategory.ChildrenDataa);
+        fun itemClicked(productData: CategoriesResponse.DataCategory);
 
     }
 
